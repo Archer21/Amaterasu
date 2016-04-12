@@ -10,20 +10,23 @@ import com.archer.amaterasu.common.BaseActivity;
 
 public abstract class SetupNavigationDrawer extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public void configViews(int stringOpen, int stringClose){
-        DrawerLayout drawer = (DrawerLayout) findViewById(getDrawerLayoutID());
+    DrawerLayout drawer;
+    NavigationView navigationView;
+
+    public void configNavigationDrawerViews(int stringOpen, int stringClose){
+        drawer = (DrawerLayout) findViewById(getDrawerLayoutID());
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, getToolbar(), stringOpen, stringClose);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(getNavigationViewID());
+        navigationView = (NavigationView) findViewById(getNavigationViewID());
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(getDrawerLayoutID());
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -31,6 +34,17 @@ public abstract class SetupNavigationDrawer extends BaseActivity implements Navi
         }
     }
 
+    /**
+     * Helper methods
+     */
+
+    public NavigationView getNavigationView(){
+        return navigationView;
+    }
+
+    public DrawerLayout getDrawer(){
+        return drawer;
+    }
 
     /**
      * Abstract methods
@@ -38,5 +52,5 @@ public abstract class SetupNavigationDrawer extends BaseActivity implements Navi
 
     public abstract int getDrawerLayoutID();
     public abstract int getNavigationViewID();
-    public abstract boolean onNavigationItemSelected(MenuItem item);
+    public abstract void setDrawerLayout(DrawerLayout drawer);
 }

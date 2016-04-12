@@ -1,31 +1,53 @@
 package com.archer.amaterasu.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.archer.amaterasu.R;
+import com.archer.amaterasu.ui.fragment.MainFragment;
 import com.archer.amaterasu.utils.SetupNavigationDrawer;
 
 public class MainActivity extends SetupNavigationDrawer{
+
+    private FragmentManager     fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupToolbar();
-        configViews(R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        configNavigationDrawerViews(R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        if (savedInstanceState == null){
+            setupFragmentConfiguration();
+        }
     }
+
+    protected void setupFragmentConfiguration(){
+        fragmentManager     = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_container, new MainFragment()).commit();
+    }
+
 
     /**
      * BASE ACTIVITY OVERRIDES METHODS
      */
 
+
     @Override
     protected int getLayout() {
         return R.layout.activity_main;
     }
+
 
 
     /**
@@ -40,6 +62,11 @@ public class MainActivity extends SetupNavigationDrawer{
     @Override
     public int getNavigationViewID() {
         return R.id.nav_view;
+    }
+
+    @Override
+    public void setDrawerLayout(DrawerLayout drawer) {
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -66,9 +93,6 @@ public class MainActivity extends SetupNavigationDrawer{
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
 
     /**
      *
