@@ -1,9 +1,12 @@
 package com.archer.amaterasu.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,21 +15,51 @@ import com.archer.amaterasu.R;
 import com.archer.amaterasu.ui.fragment.MainFragment;
 import com.archer.amaterasu.ui.fragment.TopArtistFragment;
 import com.archer.amaterasu.ui.fragment.TopSongsFragment;
+import com.archer.amaterasu.utils.PagerAdapter;
 import com.archer.amaterasu.utils.SetupNavigationDrawer;
+
+import java.util.ArrayList;
 
 public class MainActivity extends SetupNavigationDrawer{
 
     private FragmentManager     fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
+    ViewPager viewPager;
+    TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupToolbar();
         configNavigationDrawerViews(R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        if (savedInstanceState == null){
-            setupFragmentConfiguration();
-        }
+//        if (savedInstanceState == null){
+//            setupFragmentConfiguration();
+//        }
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+
+        setupViewPager();
+    }
+
+    private void setupViewPager() {
+        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), buildFragments()));
+        tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.getTabAt(0).setText("Songs");
+        tabLayout.getTabAt(1).setText("Artists");
+
+    }
+
+
+    private ArrayList<Fragment> buildFragments() {
+        ArrayList<Fragment> fragments = new ArrayList<>();
+
+        fragments.add(new TopSongsFragment());
+        fragments.add(new TopArtistFragment());
+
+        return fragments;
     }
 
     protected void setupFragmentConfiguration(){
