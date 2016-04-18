@@ -25,42 +25,16 @@ public class MainActivity extends SetupNavigationDrawer{
     private FragmentManager     fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
-    ViewPager viewPager;
-    TabLayout tabLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupToolbar();
         configNavigationDrawerViews(R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        if (savedInstanceState == null){
-//            setupFragmentConfiguration();
-//        }
-
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-
-        setupViewPager();
+        if (savedInstanceState == null){
+            setupFragmentConfiguration();
+        }
     }
 
-    private void setupViewPager() {
-        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), buildFragments()));
-        tabLayout.setupWithViewPager(viewPager);
-
-        tabLayout.getTabAt(0).setText("Songs");
-        tabLayout.getTabAt(1).setText("Artists");
-
-    }
-
-
-    private ArrayList<Fragment> buildFragments() {
-        ArrayList<Fragment> fragments = new ArrayList<>();
-
-        fragments.add(new TopSongsFragment());
-        fragments.add(new TopArtistFragment());
-
-        return fragments;
-    }
 
     protected void setupFragmentConfiguration(){
         fragmentManager     = getSupportFragmentManager();
