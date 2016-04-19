@@ -80,15 +80,15 @@ public class MainActivity extends SetupNavigationDrawer{
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.latest_news) {
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.main_container, new MainFragment()).commit();
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.favorites) {
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.main_container, new TopSongsFragment()).commit();
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.downloads) {
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.main_container, new TopArtistFragment()).commit();
