@@ -16,16 +16,26 @@ import butterknife.ButterKnife;
  */
 public class MainFragment extends SetupTabsLayout {
 
+
+    /**
+     * Required Ids for Tabs
+     */
     @Bind(R.id.viewPager)
     ViewPager viewPager;
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
 
+    /**
+     * Required Fragments Array for Tabs
+     */
     private Fragment[] tabsFragments = {
             new TopSongsFragment(),
             new TopArtistFragment()
     };
 
+    /**
+     * Required Titles String Array for Tabs
+     */
     private String[] tabsTitles = {
             "Top Songs",
             "Top Artists"
@@ -38,6 +48,9 @@ public class MainFragment extends SetupTabsLayout {
         setupViewPager(viewPager, tabLayout, tabsFragments, tabsTitles);
     }
 
+    /**
+     * Required Layout ID to inflate fragment view
+     */
     @Override
     protected int getFragmentLayout() {
         return R.layout.fragment_main;
