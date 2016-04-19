@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     tools:context="com.archer.amaterasu.ui.fragment.TopSongsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_list_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello Songs Fragment" />
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>
