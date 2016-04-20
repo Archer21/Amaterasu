@@ -31,13 +31,81 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsViewHolder> {
     @Override
     public void onBindViewHolder(TopSongsViewHolder holder, int position) {
         Song currentSong = listSongs.get(position);
-        holder.setImage(context, currentSong.getSongImage(), holder.getimageContainer(), currentSong);
+        if (currentSong.getSongImage() != null){
+            holder.setImage(context, currentSong.getSongImage());
+        } else{
+            holder.setDefaultImage(context);
+        }
+
+        holder.setName(currentSong.getSongName());
+        holder.setTopSongRating(currentSong.getSongRating());
+        holder.setPlayCount(currentSong.getSongPlaycount());
+        holder.setListeners(currentSong.getSongListeners());
     }
 
     @Override
     public int getItemCount() {
         return listSongs.size();
     }
+
+    /**
+     * Add item in the last index
+     *
+     * @param song The item to be inserted
+     */
+    public void addItem(Song song) {
+        if (song == null)
+            throw new NullPointerException("The item cannot be null");
+
+        listSongs.add(song);
+        notifyItemInserted(getItemCount() - 1);
+    }
+
+    /**
+     * Add item in determined index
+     *
+     * @param song    The event to be inserted
+     * @param position Index for the new event
+     */
+    public void addItem(Song song, int position) {
+        if (song == null)
+            throw new NullPointerException("The item cannot be null");
+
+        if (position < getItemCount() || position > getItemCount())
+            throw new IllegalArgumentException("The position must be between 0 and lastIndex + 1");
+
+        listSongs.add(position, song);
+        notifyItemInserted(position);
+    }
+
+    /**
+     * Add a bunch of items
+     *
+     * @param artists Collection to add
+     * */
+    public void addAll(ArrayList<Song> artists) {
+        if (artists == null)
+            throw new NullPointerException("The items cannot be null");
+
+        this.listSongs.addAll(artists);
+        notifyItemRangeInserted(getItemCount() - 1, artists.size());
+    }
+
+    public void replace(ArrayList<Song> artists){
+        this.listSongs = artists;
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Delete all the items
+     * */
+    public void clear() {
+        if (!listSongs.isEmpty()) {
+            listSongs.clear();
+            notifyDataSetChanged();
+        }
+    }
+
 }
 
 
