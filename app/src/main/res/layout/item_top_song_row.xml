@@ -32,12 +32,11 @@
             android:textColor="@color/textIcons"
             android:textSize="24sp" />
 
-        <RatingBar
-            android:id="@+id/top_song_rating"
-            android:numStars="5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true" />
+        <!--<RatingBar-->
+            <!--android:id="@+id/top_song_rating"-->
+            <!--android:numStars="5"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
 
             <!--android:progressTint="@color/colorAccent"-->
         <LinearLayout
@@ -58,10 +57,10 @@
                 android:textColor="@color/colorAccent" />
 
             <TextView
-                android:id="@+id/top_song_listeners"
+                android:id="@+id/top_song_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10000"
+                android:text="4.5"
                 android:drawableLeft="@drawable/ic_listener"
                 android:drawableStart="@drawable/ic_listener"
                 android:gravity="center"

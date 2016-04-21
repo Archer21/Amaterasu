@@ -2,10 +2,12 @@ package com.archer.amaterasu.domain;
 
 public class Song {
     private int    songPlaycount;
-    private int    songListeners;
+    private int    songViews;
     private float  songRating;
-    private String songName;
-    private String songImage;
+    private String songTitle;
+    private String songArtist;
+    private String songImageSmall;
+    private String songImageMedium;
 
     public int getSongPlaycount() {
         return songPlaycount;
@@ -15,12 +17,12 @@ public class Song {
         this.songPlaycount = songPlaycount;
     }
 
-    public int getSongListeners() {
-        return songListeners;
+    public int getSongViews() {
+        return songViews;
     }
 
-    public void setSongListeners(int songListeners) {
-        this.songListeners = songListeners;
+    public void setSongViews(int songViews) {
+        this.songViews = songViews;
     }
 
     public float getSongRating() {
@@ -31,19 +33,35 @@ public class Song {
         this.songRating = songRating;
     }
 
-    public String getSongName() {
-        return songName;
+    public String getSongTitle() {
+        return songTitle;
     }
 
-    public void setSongName(String songName) {
-        this.songName = songName;
+    public void setSongTitle(String songTitle) {
+        this.songTitle = songTitle;
     }
 
-    public String getSongImage() {
-        return songImage;
+    public String getSongArtist() {
+        return songArtist;
     }
 
-    public void setSongImage(String songImage) {
-        this.songImage = songImage;
+    public void setSongArtist(String songArtist) {
+        this.songArtist = songArtist;
+    }
+
+    public String getSongImageSmall() {
+        return songImageSmall;
+    }
+
+    public void setSongImageSmall(String songImageSmall) {
+        this.songImageSmall = songImageSmall;
+    }
+
+    public String getSongImageMedium() {
+        return songImageMedium;
+    }
+
+    public void setSongImageMedium(String songImageMedium) {
+        this.songImageMedium = songImageMedium;
     }
 }

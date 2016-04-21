@@ -31,16 +31,15 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsViewHolder> {
     @Override
     public void onBindViewHolder(TopSongsViewHolder holder, int position) {
         Song currentSong = listSongs.get(position);
-        if (currentSong.getSongImage() != null){
-            holder.setImage(context, currentSong.getSongImage());
+        if (currentSong.getSongImageSmall() != null){
+            holder.setImage(context, currentSong.getSongImageSmall());
         } else{
             holder.setDefaultImage(context);
         }
 
-        holder.setName(currentSong.getSongName());
+        holder.setName(currentSong.getSongTitle());
         holder.setTopSongRating(currentSong.getSongRating());
-        holder.setPlayCount(currentSong.getSongPlaycount());
-        holder.setListeners(currentSong.getSongListeners());
+        holder.setPlayCount(currentSong.getSongViews());
     }
 
     @Override
