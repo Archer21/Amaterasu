@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import com.archer.amaterasu.R;
+import com.archer.amaterasu.common.BasePresenter;
 import com.archer.amaterasu.utils.SetupTabsLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -54,5 +55,10 @@ public class MainFragment extends SetupTabsLayout {
     @Override
     protected int getFragmentLayout() {
         return R.layout.fragment_main;
+    }
+
+    @Override
+    protected BasePresenter getPresenter() {
+        return null;
     }
 }

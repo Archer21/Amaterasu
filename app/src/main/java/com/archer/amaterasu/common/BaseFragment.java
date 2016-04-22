@@ -34,13 +34,13 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-//        getPresenter().onStart();
+        getPresenter().onStart();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-//        getPresenter().onStop();
+        getPresenter().onStop();
     }
 
     @Override
@@ -55,7 +55,7 @@ public abstract class BaseFragment extends Fragment{
     /**
      * @return The presenter attached to the fragment. This must extends from {@link BasePresenter}
      * */
-//    protected abstract BasePresenter getPresenter();
+    protected abstract BasePresenter getPresenter();
 
     /**
      * Replace all the annotated fields with ButterKnife annotations with the proper value
