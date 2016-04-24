@@ -40,10 +40,16 @@ public class TopSongsFragment extends BaseFragment implements TopSongViewModel {
     @Bind(R.id.recycler_list_container)
     RecyclerView recyclerList;
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter = new TopSongPresenter(this);
+    }
 
     @Override
     public void onResume() {
         super.onResume();
+        presenter.searchSongs();
     }
 
 
@@ -54,7 +60,6 @@ public class TopSongsFragment extends BaseFragment implements TopSongViewModel {
 
     @Override
     protected BasePresenter getPresenter() {
-        presenter = new TopSongPresenter(this);
         return presenter;
     }
 

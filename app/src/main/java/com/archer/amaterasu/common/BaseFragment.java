@@ -34,13 +34,17 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
-        getPresenter().onStart();
+        if (getPresenter() != null){
+            getPresenter().onStart();
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        getPresenter().onStop();
+        if (getPresenter() != null){
+            getPresenter().onStop();
+        }
     }
 
     @Override

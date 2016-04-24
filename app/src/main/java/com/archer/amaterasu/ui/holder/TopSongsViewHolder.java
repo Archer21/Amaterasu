@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import com.archer.amaterasu.R;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,6 +44,7 @@ public class TopSongsViewHolder extends RecyclerView.ViewHolder{
     public void setImage(Context context, String urlImage){
         Picasso.with(context)
                 .load(urlImage)
+                .networkPolicy(NetworkPolicy.OFFLINE)
                 .placeholder(R.drawable.placeholder_image)
                 .into(topSongImage);
     }

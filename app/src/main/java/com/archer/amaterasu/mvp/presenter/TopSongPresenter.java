@@ -17,15 +17,16 @@ public class TopSongPresenter extends BasePresenter implements SongsSearchServer
 
     public TopSongPresenter(TopSongViewModel view){
         this.mView = new WeakReference<TopSongViewModel>(view);
+        mInteractor = new TopSongInteractor(this);
     }
 
     /**
      * TopSongPresenter methods
      */
-    void onConfigurationChanged(TopSongViewModel view){
+    public void onConfigurationChanged(TopSongViewModel view){
         mView = new WeakReference<TopSongViewModel>(view);
     }
-    void onDestroy(boolean isChangingConfig){
+    public void onDestroy(boolean isChangingConfig){
         mView = null;
         mIsChangingConfig = isChangingConfig;
         if (!isChangingConfig){
@@ -34,8 +35,8 @@ public class TopSongPresenter extends BasePresenter implements SongsSearchServer
     }
 
 
-    void searchSongs(){
-        mInteractor.performSearch(this);
+    public void searchSongs(){
+        mInteractor.performSearch();
     }
 
 
