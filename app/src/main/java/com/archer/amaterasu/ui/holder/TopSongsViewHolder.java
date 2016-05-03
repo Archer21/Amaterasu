@@ -59,15 +59,6 @@ public class TopSongsViewHolder extends RecyclerView.ViewHolder{
     public void setPlayCount(int playCount){
         this.topSongPlaycount.setText(playCount + "");
     }
-
-//    public void setListeners(int listeners){
-//        if (listeners >= 100000){
-//            listeners = listeners/1000;
-//            this.topSongListeners.setText(listeners + "K");
-//        } else {
-//            this.topSongListeners.setText(listeners + "");
-//        }
-//    }
 }
 
 
