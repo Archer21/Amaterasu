@@ -32,10 +32,10 @@ import retrofit2.Response;
 public class TopSongsFragment extends BaseFragment implements TopSongViewModel {
 
     public static final String LOG_TAG = TopSongsFragment.class.getSimpleName();
-    private boolean isFirstTime = true;
     private static final int NUM_COLS = 2;
     private TopSongsAdapter topSongsAdapter;
     TopSongPresenter presenter;
+    boolean isFirstCall = true;
 
     @Bind(R.id.recycler_list_container)
     RecyclerView recyclerList;
