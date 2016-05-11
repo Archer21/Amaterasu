@@ -16,16 +16,20 @@ public class TopArtistViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.top_artist_image)
     SimpleDraweeView artistImage;
     @Bind(R.id.top_artist_name)
-    TextView artistText;
+    TextView artistName;
 
     public TopArtistViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(itemView);
+        ButterKnife.bind(this, itemView);
     }
 
     public void setArtistImage(String urlImage){
         Uri uri = Uri.parse(urlImage);
         artistImage.setImageURI(uri);
+    }
+
+    public void setArtistName(String name){
+        this.artistName.setText(name);
     }
 }
 

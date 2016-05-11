@@ -1,6 +1,8 @@
 package com.archer.amaterasu.io;
 
+import com.archer.amaterasu.io.deserializer.ArtistDeserializer;
 import com.archer.amaterasu.io.deserializer.SongDeserializer;
+import com.archer.amaterasu.io.model.ArtistResponse;
 import com.archer.amaterasu.io.model.SongResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +29,7 @@ public class ApiAdapter {
     private static Gson buildGsonConverterFactory(){
         Gson gsonBuilder = new GsonBuilder()
                 .registerTypeAdapter(SongResponse.class, new SongDeserializer())
+                .registerTypeAdapter(ArtistResponse.class, new ArtistDeserializer())
                 .create();
         return gsonBuilder;
     }
