@@ -6,15 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
 import com.archer.amaterasu.common.BasePresenter;
 import com.archer.amaterasu.domain.Song;
-import com.archer.amaterasu.io.ApiAdapter;
-import com.archer.amaterasu.io.model.SongResponse;
 import com.archer.amaterasu.mvp.presenter.TopSongPresenter;
 import com.archer.amaterasu.mvp.viewmodel.TopSongViewModel;
 import com.archer.amaterasu.ui.adapter.TopSongsAdapter;
@@ -22,9 +22,6 @@ import com.archer.amaterasu.ui.adapter.TopSongsAdapter;
 import java.util.ArrayList;
 
 import butterknife.Bind;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +29,7 @@ import retrofit2.Response;
 public class TopSongsFragment extends BaseFragment implements TopSongViewModel {
 
     public static final String LOG_TAG = TopSongsFragment.class.getSimpleName();
+
     private static final int NUM_COLS = 2;
     private TopSongsAdapter topSongsAdapter;
     TopSongPresenter presenter;
@@ -49,9 +47,14 @@ public class TopSongsFragment extends BaseFragment implements TopSongViewModel {
     @Override
     public void onResume() {
         super.onResume();
-        presenter.searchSongs();
+        if (isFirstCall){
+            presenter.searchSongs();
+            this.isFirstCall = false;
+            Log.e(LOG_TAG, "LOADING DATA FIRST TIME");
+        } else {
+            presenter.onConfigurationChanged();
+        }
     }
-
 
     @Override
     protected int getFragmentLayout() {

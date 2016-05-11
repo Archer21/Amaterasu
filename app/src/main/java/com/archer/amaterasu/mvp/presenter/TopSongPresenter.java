@@ -1,5 +1,7 @@
 package com.archer.amaterasu.mvp.presenter;
 
+import android.util.Log;
+
 import com.archer.amaterasu.common.BasePresenter;
 import com.archer.amaterasu.domain.Song;
 import com.archer.amaterasu.io.callback.SongsSearchServerCallback;
@@ -23,9 +25,14 @@ public class TopSongPresenter extends BasePresenter implements SongsSearchServer
     /**
      * TopSongPresenter methods
      */
-    public void onConfigurationChanged(TopSongViewModel view){
-        mView = new WeakReference<TopSongViewModel>(view);
+//    public void onConfigurationChanged(TopSongViewModel view){
+//        mView = new WeakReference<TopSongViewModel>(view);
+//    }
+
+    public void onConfigurationChanged(){
+        Log.e("TopSongPresenter", "DATA IS CURRENT LOADED");
     }
+
     public void onDestroy(boolean isChangingConfig){
         mView = null;
         mIsChangingConfig = isChangingConfig;

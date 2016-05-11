@@ -3,6 +3,7 @@ package com.archer.amaterasu.ui.holder;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,15 +11,14 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import com.archer.amaterasu.R;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
+import com.facebook.drawee.view.SimpleDraweeView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class TopSongsViewHolder extends RecyclerView.ViewHolder{
 
     @Bind(R.id.top_song_image)
-    ImageView topSongImage;
+    SimpleDraweeView topSongImage;
     @Bind(R.id.top_song_name)
     TextView  topSongName;
     @Bind(R.id.top_song_rating)
@@ -35,18 +35,9 @@ public class TopSongsViewHolder extends RecyclerView.ViewHolder{
 //        DrawableCompat.setTint(progress, Color.rgb(255,50,120));
     }
 
-    public void setDefaultImage(Context context){
-        Picasso.with(context)
-                .load(R.drawable.placeholder_image)
-                .into(topSongImage);
-    }
-
     public void setImage(Context context, String urlImage){
-        Picasso.with(context)
-                .load(urlImage)
-                .networkPolicy(NetworkPolicy.OFFLINE)
-                .placeholder(R.drawable.placeholder_image)
-                .into(topSongImage);
+        Uri uri = Uri.parse(urlImage);
+        topSongImage.setImageURI(uri);
     }
 
     public void setName(String name){
