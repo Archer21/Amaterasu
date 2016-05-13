@@ -52,7 +52,7 @@ public class TopSongsFragment extends BaseFragment implements TopSongViewModel {
             this.isFirstCall = false;
             Log.e(LOG_TAG, "LOADING DATA FIRST TIME");
         } else {
-            presenter.onConfigurationChanged();
+            Log.e(LOG_TAG, "DATA IS CURRENT LOADED");
         }
     }
 

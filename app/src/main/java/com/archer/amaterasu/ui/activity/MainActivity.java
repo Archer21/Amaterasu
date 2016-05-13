@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.archer.amaterasu.R;
+import com.archer.amaterasu.ui.fragment.FavoritesFragment;
 import com.archer.amaterasu.ui.fragment.MainFragment;
 import com.archer.amaterasu.ui.fragment.TopArtistFragment;
 import com.archer.amaterasu.ui.fragment.TopSongsFragment;
@@ -87,7 +88,7 @@ public class MainActivity extends SetupNavigationDrawer{
         } else if (id == R.id.favorites) {
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.main_container, new TopSongsFragment()).commit();
+            fragmentTransaction.replace(R.id.main_container, new FavoritesFragment()).commit();
         } else if (id == R.id.downloads) {
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();

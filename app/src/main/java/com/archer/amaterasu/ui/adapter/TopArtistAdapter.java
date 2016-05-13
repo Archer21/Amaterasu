@@ -33,6 +33,8 @@ public class TopArtistAdapter extends RecyclerView.Adapter<TopArtistViewHolder>{
         Artist currentArtist = topArtistsArrayList.get(position);
         holder.setArtistImage(currentArtist.getCover());
         holder.setArtistName(currentArtist.getName());
+        holder.setArtistVotes(currentArtist.getVotes());
+        holder.setArtistRating(currentArtist.getRating());
     }
 
     @Override

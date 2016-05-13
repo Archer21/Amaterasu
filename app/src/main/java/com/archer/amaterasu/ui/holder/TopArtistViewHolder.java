@@ -17,6 +17,10 @@ public class TopArtistViewHolder extends RecyclerView.ViewHolder {
     SimpleDraweeView artistImage;
     @Bind(R.id.top_artist_name)
     TextView artistName;
+    @Bind(R.id.top_artist_votes)
+    TextView artistVotes;
+    @Bind(R.id.top_artist_rating)
+    TextView artistRating;
 
     public TopArtistViewHolder(View itemView) {
         super(itemView);
@@ -30,6 +34,16 @@ public class TopArtistViewHolder extends RecyclerView.ViewHolder {
 
     public void setArtistName(String name){
         this.artistName.setText(name);
+    }
+
+    public void setArtistVotes(int votes) {
+        String artistVotes = String.valueOf(votes);
+        this.artistVotes.setText(artistVotes);
+    }
+
+    public void setArtistRating(float rating) {
+        String artistRating = String.valueOf(rating);
+        this.artistRating.setText(artistRating);
     }
 }
 
