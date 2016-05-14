@@ -11,4 +11,5 @@
     <string name="failed_search">No se pudo cargar el contenido</string>
     <string name="network_error">Ocurrio algun problema al hacer la peticion, revise su conexion a internet</string>
     <string name="server_error">Ocurrio algun problema con nuestro seridor</string>
+    <string name="title_activity_song_detail">SongDetailActivity</string>
 </resources>

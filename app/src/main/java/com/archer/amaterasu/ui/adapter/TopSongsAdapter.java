@@ -16,6 +16,7 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsViewHolder> {
 
     ArrayList<Song> listSongs;
     Context context;
+    ItemClickListener clickListener;
 
     public TopSongsAdapter(Context context) {
         this.context = context;
@@ -36,6 +37,7 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsViewHolder> {
         holder.setName(currentSong.getSongTitle());
         holder.setTopSongRating(currentSong.getSongRating());
         holder.setPlayCount(currentSong.getSongViews());
+        holder.setClickListener(clickListener);
     }
 
     @Override
@@ -99,6 +101,23 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsViewHolder> {
             listSongs.clear();
             notifyDataSetChanged();
         }
+    }
+
+    public void setOnItemClickListener(ItemClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+
+    public Song getItemAtPosition(int position){
+        return listSongs.get(position);
+    }
+
+    public interface ItemClickListener{
+        /**
+         * This method will be invoked when an item from the list be clicked
+         * @param position position in the list
+         * */
+        void onItemClicked(int position);
     }
 
 }
