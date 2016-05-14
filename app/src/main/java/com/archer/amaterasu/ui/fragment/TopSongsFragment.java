@@ -15,6 +15,9 @@ import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
 import com.archer.amaterasu.common.BasePresenter;
 import com.archer.amaterasu.domain.Song;
+import com.archer.amaterasu.io.ApiAdapter;
+import com.archer.amaterasu.io.ApiService;
+import com.archer.amaterasu.io.model.SongResponse;
 import com.archer.amaterasu.mvp.presenter.TopSongPresenter;
 import com.archer.amaterasu.mvp.viewmodel.TopSongViewModel;
 import com.archer.amaterasu.ui.adapter.TopSongsAdapter;
@@ -22,33 +25,56 @@ import com.archer.amaterasu.ui.adapter.TopSongsAdapter;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopSongsFragment extends BaseFragment implements TopSongViewModel {
+public class TopSongsFragment extends BaseFragment {
 
     public static final String LOG_TAG = TopSongsFragment.class.getSimpleName();
 
     private static final int NUM_COLS = 2;
     private TopSongsAdapter topSongsAdapter;
-    TopSongPresenter presenter;
     boolean isFirstCall = true;
 
     @Bind(R.id.recycler_list_container)
     RecyclerView recyclerList;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        topSongsAdapter = new TopSongsAdapter(CONTEXT);
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new TopSongPresenter(this);
+        setupList();
+    }
+
+    public void callData(){
+        Call<SongResponse> call = ApiAdapter.getApiService().getSongs();
+        call.enqueue(new Callback<SongResponse>() {
+            @Override
+            public void onResponse(Response<SongResponse> response) {
+                topSongsAdapter.addAll(response.body().getSongs());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
         if (isFirstCall){
-            presenter.searchSongs();
+            callData();
             this.isFirstCall = false;
             Log.e(LOG_TAG, "LOADING DATA FIRST TIME");
         } else {
@@ -63,41 +89,16 @@ public class TopSongsFragment extends BaseFragment implements TopSongViewModel {
 
     @Override
     protected BasePresenter getPresenter() {
-        return presenter;
+        return null;
     }
 
 
-    @Override
     public void setupList() {
         topSongsAdapter = new TopSongsAdapter(CONTEXT);
         recyclerList.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLS));
         recyclerList.setAdapter(topSongsAdapter);
     }
 
-    @Override
-    public void setupAdapter() {
-
-    }
-
-    @Override
-    public void displayFoundSongs(ArrayList<Song> songs) {
-        topSongsAdapter.addAll(songs);
-    }
-
-    @Override
-    public void displayFailedSearch() {
-        Toast.makeText(CONTEXT, R.string.failed_search, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void displayNetworkError() {
-        Toast.makeText(CONTEXT, R.string.network_error, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void displayServerError() {
-        Toast.makeText(CONTEXT, R.string.server_error, Toast.LENGTH_SHORT).show();
-    }
 
 //    private void setDummieContent(){
 //        ArrayList<Song> songs = new ArrayList<>();
