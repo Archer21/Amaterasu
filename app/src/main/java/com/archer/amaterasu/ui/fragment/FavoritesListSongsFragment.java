@@ -45,8 +45,10 @@ public class FavoritesListSongsFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerList = (RecyclerView) view.findViewById(R.id.recycler_favorites_songs);
-        setupListConfiguration();
-        setDummieContent();
+        if (savedInstanceState == null){
+            setupListConfiguration();
+            setDummieContent();
+        }
     }
 
     private void setupListConfiguration(){
@@ -116,6 +118,14 @@ public class FavoritesListSongsFragment extends BaseFragment {
         dummieList.add(listTwo);
         dummieList.add(listThree);
         dummieList.add(listFour);
+
+        dummieList.add(listTwo);
+        dummieList.add(listOne);
+        dummieList.add(listFour);
+        dummieList.add(listThree);
+
+        dummieList.add(listOne);
+        dummieList.add(listTwo);
 
         adapter.addAll(dummieList);
     }

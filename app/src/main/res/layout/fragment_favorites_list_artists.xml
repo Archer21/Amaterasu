@@ -5,7 +5,7 @@
     tools:context="com.archer.amaterasu.ui.fragment.FavoritesListArtistsFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/favorites_songs_recycler_list"
+        android:id="@+id/favorites_artists_recycler_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
