@@ -1,18 +1,24 @@
 package com.archer.amaterasu.ui.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.domain.Song;
-import com.archer.amaterasu.ui.holder.TopSongsViewHolder;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
-public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsViewHolder> {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSongsViewHolder> {
 
     ArrayList<Song> listSongs;
     Context context;
@@ -118,6 +124,56 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsViewHolder> {
          * @param position position in the list
          * */
         void onItemClicked(int position);
+    }
+
+    public class TopSongsViewHolder extends RecyclerView.ViewHolder{
+
+        @Bind(R.id.top_song_image)
+        SimpleDraweeView topSongImage;
+        @Bind(R.id.top_song_name)
+        TextView topSongName;
+        @Bind(R.id.top_song_rating)
+        TextView topSongRating;
+        @Bind(R.id.top_song_playcount)
+        TextView  topSongPlaycount;
+//    @Bind(R.id.top_song_listeners)
+//    TextView  topSongListeners;
+
+        public TopSongsViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (clickListener != null) {
+                        clickListener.onItemClicked(getPosition());
+                    } else {
+                        Log.e("Holder", "Not calling the method");
+                    }
+                }
+            });
+//        Drawable progress = topSongRating.getProgressDrawable();
+//        DrawableCompat.setTint(progress, Color.rgb(255,50,120));
+        }
+
+        public void setClickListener(TopSongsAdapter.ItemClickListener itemClickListener){
+            clickListener = itemClickListener;
+        }
+        public void setImage(Context context, String urlImage){
+            Uri uri = Uri.parse(urlImage);
+            topSongImage.setImageURI(uri);
+        }
+
+        public void setName(String name){
+            this.topSongName.setText(name);
+        }
+
+        public void setTopSongRating(float rating){
+            this.topSongRating.setText(rating + "");
+        }
+        public void setPlayCount(int playCount){
+            this.topSongPlaycount.setText(playCount + "");
+        }
     }
 
 }

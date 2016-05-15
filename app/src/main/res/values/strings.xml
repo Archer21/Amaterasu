@@ -12,4 +12,5 @@
     <string name="network_error">Ocurrio algun problema al hacer la peticion, revise su conexion a internet</string>
     <string name="server_error">Ocurrio algun problema con nuestro seridor</string>
     <string name="title_activity_song_detail">SongDetailActivity</string>
+    <string name="title_activity_artist_detail">ArtistDetailActivity</string>
 </resources>
