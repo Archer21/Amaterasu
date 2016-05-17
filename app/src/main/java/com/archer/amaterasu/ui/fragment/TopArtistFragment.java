@@ -1,6 +1,7 @@
 package com.archer.amaterasu.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
@@ -17,6 +19,7 @@ import com.archer.amaterasu.common.BasePresenter;
 import com.archer.amaterasu.domain.Artist;
 import com.archer.amaterasu.io.ApiAdapter;
 import com.archer.amaterasu.io.model.ArtistResponse;
+import com.archer.amaterasu.ui.activity.ArtistDetailActivity;
 import com.archer.amaterasu.ui.adapter.TopArtistAdapter;
 
 import java.util.ArrayList;
@@ -45,7 +48,14 @@ public class TopArtistFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topArtistAdapter = new TopArtistAdapter(getActivity());
+        topArtistAdapter = new TopArtistAdapter(getActivity(), new TopArtistAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Artist item) {
+                Intent intent = new Intent(CONTEXT, ArtistDetailActivity.class);
+                intent.putExtra("NAME", item.getName());
+                startActivity(intent);
+            }
+        });
 
     }
 

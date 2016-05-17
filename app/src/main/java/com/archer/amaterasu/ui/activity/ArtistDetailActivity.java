@@ -3,29 +3,38 @@ package com.archer.amaterasu.ui.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.archer.amaterasu.R;
+import com.archer.amaterasu.common.BaseActivity;
+import com.archer.amaterasu.ui.fragment.ArtistDetailFragment;
+import com.archer.amaterasu.ui.fragment.SongDetailFragment;
 
-public class ArtistDetailActivity extends AppCompatActivity {
+public class ArtistDetailActivity extends BaseActivity {
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_artist_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setupToolbar();
+        setupFragmentConfiguration();
+    }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    protected void setupFragmentConfiguration(){
+        fragmentManager     = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_container, new ArtistDetailFragment()).commit();
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_artist_detail;
     }
 
 }

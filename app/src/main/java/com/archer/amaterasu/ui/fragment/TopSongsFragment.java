@@ -21,6 +21,7 @@ import com.archer.amaterasu.io.ApiService;
 import com.archer.amaterasu.io.model.SongResponse;
 import com.archer.amaterasu.mvp.presenter.TopSongPresenter;
 import com.archer.amaterasu.mvp.viewmodel.TopSongViewModel;
+import com.archer.amaterasu.ui.activity.ArtistDetailActivity;
 import com.archer.amaterasu.ui.activity.SongDetailActivity;
 import com.archer.amaterasu.ui.adapter.TopSongsAdapter;
 
@@ -34,7 +35,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopSongsFragment extends BaseFragment implements TopSongsAdapter.ItemClickListener{
+public class TopSongsFragment extends BaseFragment{
 
     public static final String LOG_TAG = TopSongsFragment.class.getSimpleName();
 
@@ -100,18 +101,7 @@ public class TopSongsFragment extends BaseFragment implements TopSongsAdapter.It
         topSongsAdapter = new TopSongsAdapter(CONTEXT);
         recyclerList.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLS));
         recyclerList.setAdapter(topSongsAdapter);
-        topSongsAdapter.setOnItemClickListener(this);
     }
-
-    @Override
-    public void onItemClicked(int position) {
-        Song currentSong = topSongsAdapter.getItemAtPosition(position);
-        Intent intent = new Intent(CONTEXT, SongDetailActivity.class);
-        Toast.makeText(CONTEXT, "Clicked " + currentSong.getSongTitle(), Toast.LENGTH_LONG).show();
-        startActivity(intent);
-    }
-
-
 //    private void setDummieContent(){
 //        ArrayList<Song> songs = new ArrayList<>();
 //        for (int i = 0; i < 9; i++) {

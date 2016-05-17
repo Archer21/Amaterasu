@@ -1,25 +1,33 @@
 package com.archer.amaterasu.ui.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.domain.Artist;
 import com.archer.amaterasu.ui.holder.TopArtistViewHolder;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
-public class TopArtistAdapter extends RecyclerView.Adapter<TopArtistViewHolder>{
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class TopArtistAdapter extends RecyclerView.Adapter<TopArtistAdapter.TopArtistViewHolder>{
 
     private Context context;
     private ArrayList<Artist> topArtistsArrayList;
+    OnItemClickListener listener;
 
-    public TopArtistAdapter(Context context){
+    public TopArtistAdapter(Context context, OnItemClickListener listener){
         this.context = context;
         this.topArtistsArrayList = new ArrayList<>();
+        this.listener = listener;
     }
 
     @Override
@@ -35,7 +43,10 @@ public class TopArtistAdapter extends RecyclerView.Adapter<TopArtistViewHolder>{
         holder.setArtistName(currentArtist.getName());
         holder.setArtistVotes(currentArtist.getVotes());
         holder.setArtistRating(currentArtist.getRating());
+        holder.bind(topArtistsArrayList.get(position), listener);
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -97,6 +108,54 @@ public class TopArtistAdapter extends RecyclerView.Adapter<TopArtistViewHolder>{
         if (!topArtistsArrayList.isEmpty()) {
             topArtistsArrayList.clear();
             notifyDataSetChanged();
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Artist item);
+    }
+
+    public class TopArtistViewHolder extends RecyclerView.ViewHolder {
+
+        @Bind(R.id.top_artist_image)
+        SimpleDraweeView artistImage;
+        @Bind(R.id.top_artist_name)
+        TextView artistName;
+        @Bind(R.id.top_artist_votes)
+        TextView artistVotes;
+        @Bind(R.id.top_artist_rating)
+        TextView artistRating;
+
+        public TopArtistViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+
+        public void setArtistImage(String urlImage){
+            Uri uri = Uri.parse(urlImage);
+            artistImage.setImageURI(uri);
+        }
+
+        public void setArtistName(String name){
+            this.artistName.setText(name);
+        }
+
+        public void setArtistVotes(int votes) {
+            String artistVotes = String.valueOf(votes);
+            this.artistVotes.setText(artistVotes);
+        }
+
+        public void setArtistRating(float rating) {
+            String artistRating = String.valueOf(rating);
+            this.artistRating.setText(artistRating);
+        }
+
+        public void bind(final Artist item, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(item);
+                }
+            });
         }
     }
 }

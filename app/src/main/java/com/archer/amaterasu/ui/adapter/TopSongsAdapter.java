@@ -22,7 +22,6 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
 
     ArrayList<Song> listSongs;
     Context context;
-    ItemClickListener clickListener;
 
     public TopSongsAdapter(Context context) {
         this.context = context;
@@ -43,7 +42,6 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
         holder.setName(currentSong.getSongTitle());
         holder.setTopSongRating(currentSong.getSongRating());
         holder.setPlayCount(currentSong.getSongViews());
-        holder.setClickListener(clickListener);
     }
 
     @Override
@@ -109,22 +107,11 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
         }
     }
 
-    public void setOnItemClickListener(ItemClickListener clickListener) {
-        this.clickListener = clickListener;
-    }
-
 
     public Song getItemAtPosition(int position){
         return listSongs.get(position);
     }
 
-    public interface ItemClickListener{
-        /**
-         * This method will be invoked when an item from the list be clicked
-         * @param position position in the list
-         * */
-        void onItemClicked(int position);
-    }
 
     public class TopSongsViewHolder extends RecyclerView.ViewHolder{
 
@@ -142,23 +129,10 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
         public TopSongsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (clickListener != null) {
-                        clickListener.onItemClicked(getPosition());
-                    } else {
-                        Log.e("Holder", "Not calling the method");
-                    }
-                }
-            });
 //        Drawable progress = topSongRating.getProgressDrawable();
 //        DrawableCompat.setTint(progress, Color.rgb(255,50,120));
         }
 
-        public void setClickListener(TopSongsAdapter.ItemClickListener itemClickListener){
-            clickListener = itemClickListener;
-        }
         public void setImage(Context context, String urlImage){
             Uri uri = Uri.parse(urlImage);
             topSongImage.setImageURI(uri);
@@ -175,7 +149,6 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
             this.topSongPlaycount.setText(playCount + "");
         }
     }
-
 }
 
 
