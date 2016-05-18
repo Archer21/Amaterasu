@@ -16,16 +16,19 @@ package com.archer.amaterasu.domain;
 //    }]
 //}
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Artist {
-    private int      id;
-    private String[] albums;
-    private String   debut;
-    private String   gender;
-    private int      votes;
-    private float    rating;
-    private String   name;
-    private String   cover;
-    private String   photo;
+    public int      id;
+    public String[] albums;
+    public String   debut;
+    public String   gender;
+    public int      votes;
+    public float    rating;
+    public String   name;
+    public String   cover;
+    public String   photo;
 
     public int getVotes() {
         return votes;
