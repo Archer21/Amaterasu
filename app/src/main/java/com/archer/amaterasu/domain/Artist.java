@@ -18,10 +18,13 @@ package com.archer.amaterasu.domain;
 
 import org.parceler.Parcel;
 
+import io.realm.RealmObject;
+
 @Parcel
-public class Artist {
+public class Artist extends RealmObject{
+
     public int      id;
-    public String[] albums;
+//    public String[] albums;
     public String   debut;
     public String   gender;
     public int      votes;
