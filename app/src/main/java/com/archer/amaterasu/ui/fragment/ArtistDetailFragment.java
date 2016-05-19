@@ -1,6 +1,7 @@
 package com.archer.amaterasu.ui.fragment;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -14,7 +15,11 @@ import android.widget.TextView;
 
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BasePresenter;
+import com.archer.amaterasu.domain.Artist;
 import com.archer.amaterasu.utils.SetupTabsLayout;
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.parceler.Parcels;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,6 +35,10 @@ public class ArtistDetailFragment extends SetupTabsLayout {
     TabLayout tabLayout;
     @Bind(R.id.artist_name)
     TextView artistName;
+    @Bind(R.id.artist_image)
+    SimpleDraweeView artistImage;
+    @Bind(R.id.artist_rank)
+    TextView artistRanking;
 
     Fragment[] tabsFragments = {
             new ArtistPersonalInformationFragment(),
@@ -56,11 +65,29 @@ public class ArtistDetailFragment extends SetupTabsLayout {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(view);
-        Bundle bundle = getActivity().getIntent().getExtras();
-        String name = bundle.getString("NAME");
-        artistName.setText(name);
+        configArtist();
         setupViewPager(viewPager, tabLayout, tabsFragments, tabsTitles);
         tabLayout.setTabTextColors(R.color.primaryText, R.color.primaryText);
+    }
+
+    public void configArtist(){
+        Artist artist = Parcels.unwrap(getActivity().getIntent().getParcelableExtra("ARTIST"));
+        setArtistImage(artist.getPhoto());
+        setArtistName(artist.getName());
+        setArtistRanking(artist.getRating());
+    }
+
+    public void setArtistName(String name){
+        artistName.setText(name);
+    }
+
+    public void setArtistImage(String urlImage){
+        Uri uri = Uri.parse(urlImage);
+        artistImage.setImageURI(uri);
+    }
+
+    public void setArtistRanking(float ranking){
+        artistRanking.setText("Ranking: " + ranking);
     }
 
     @Override

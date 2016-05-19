@@ -150,6 +150,7 @@ public class TopArtistAdapter extends RecyclerView.Adapter<TopArtistAdapter.TopA
             this.artistRating.setText(artistRating);
         }
 
+
         public void bind(final Artist item, final OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {

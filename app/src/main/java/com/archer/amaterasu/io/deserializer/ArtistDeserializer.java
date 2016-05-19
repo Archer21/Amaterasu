@@ -45,6 +45,7 @@ public class ArtistDeserializer implements JsonDeserializer<ArtistResponse> {
             currentArtist.setVotes(votes);
             currentArtist.setRating(rating);
             currentArtist.setCover(artistImages.get(0));
+            currentArtist.setPhoto(artistImages.get(1));
             artists.add(currentArtist);
         }
         return artists;

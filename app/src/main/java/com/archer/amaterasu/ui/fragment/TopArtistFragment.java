@@ -22,6 +22,8 @@ import com.archer.amaterasu.io.model.ArtistResponse;
 import com.archer.amaterasu.ui.activity.ArtistDetailActivity;
 import com.archer.amaterasu.ui.adapter.TopArtistAdapter;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -52,7 +54,7 @@ public class TopArtistFragment extends BaseFragment {
             @Override
             public void onItemClick(Artist item) {
                 Intent intent = new Intent(CONTEXT, ArtistDetailActivity.class);
-                intent.putExtra("NAME", item.getName());
+                intent.putExtra("ARTIST", Parcels.wrap(item));
                 startActivity(intent);
             }
         });
