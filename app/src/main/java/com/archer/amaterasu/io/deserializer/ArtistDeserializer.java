@@ -34,6 +34,7 @@ public class ArtistDeserializer implements JsonDeserializer<ArtistResponse> {
         for (int i = 0; i < size; i++) {
             Artist currentArtist = new Artist();
             JsonObject artistData = array.get(i).getAsJsonObject();
+            int id = artistData.get(ArtistKeys.ARTIST_ID).getAsInt();
             String name   = artistData.get(ArtistKeys.ARTIST_NAME).getAsString();
             int    votes  = artistData.get(ArtistKeys.ARTIST_VOTES).getAsInt();
             float  rating = artistData.get(ArtistKeys.ARTIST_RATING).getAsFloat();
@@ -41,6 +42,7 @@ public class ArtistDeserializer implements JsonDeserializer<ArtistResponse> {
             JsonArray imagesArray = artistData.get(ArtistKeys.ARTIST_IMAGES_ARRAY).getAsJsonArray();
             HashMap<Integer, String> artistImages = extractImagesFromJsonArray(imagesArray);
 
+            currentArtist.setId(id);
             currentArtist.setName(name);
             currentArtist.setVotes(votes);
             currentArtist.setRating(rating);

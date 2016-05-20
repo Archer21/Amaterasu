@@ -19,19 +19,31 @@ package com.archer.amaterasu.domain;
 import org.parceler.Parcel;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 @Parcel
 public class Artist extends RealmObject{
 
-    public int      id;
 //    public String[] albums;
-    public String   debut;
+//    public String   debut;
+
+    @PrimaryKey
+    public int      id;
+
     public String   gender;
     public int      votes;
     public float    rating;
     public String   name;
     public String   cover;
     public String   photo;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getVotes() {
         return votes;

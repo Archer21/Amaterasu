@@ -27,6 +27,7 @@ public class ArtistKeys {
     /**
      * Artist Object Keys
      */
+    public static final String ARTIST_ID     = "id";
     public static final String ARTIST_NAME   = "name";
     public static final String ARTIST_VOTES  = "votes";
     public static final String ARTIST_RATING = "rating";

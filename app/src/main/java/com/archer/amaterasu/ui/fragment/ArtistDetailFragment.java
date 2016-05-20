@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +24,16 @@ import org.parceler.Parcels;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ArtistDetailFragment extends SetupTabsLayout {
+
+    public static final String LOG_TAG = ArtistDetailFragment.class.getSimpleName();
 
     @Bind(R.id.viewPager)
     ViewPager viewPager;
@@ -39,6 +45,9 @@ public class ArtistDetailFragment extends SetupTabsLayout {
     SimpleDraweeView artistImage;
     @Bind(R.id.artist_rank)
     TextView artistRanking;
+
+    Realm realm;
+    Artist artist;
 
     Fragment[] tabsFragments = {
             new ArtistPersonalInformationFragment(),
@@ -53,6 +62,18 @@ public class ArtistDetailFragment extends SetupTabsLayout {
 
     public ArtistDetailFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        realm = Realm.getDefaultInstance();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        realm.close();
     }
 
     @Override
@@ -71,7 +92,7 @@ public class ArtistDetailFragment extends SetupTabsLayout {
     }
 
     public void configArtist(){
-        Artist artist = Parcels.unwrap(getActivity().getIntent().getParcelableExtra("ARTIST"));
+        artist = Parcels.unwrap(getActivity().getIntent().getParcelableExtra("ARTIST"));
         setArtistImage(artist.getPhoto());
         setArtistName(artist.getName());
         setArtistRanking(artist.getRating());
@@ -88,6 +109,25 @@ public class ArtistDetailFragment extends SetupTabsLayout {
 
     public void setArtistRanking(float ranking){
         artistRanking.setText("Ranking: " + ranking);
+    }
+
+    @OnClick(R.id.add_to_favorite_button)
+    public void add(){
+        final Artist currentArtist = artist;
+        realm.executeTransaction(new Realm.Transaction(){
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealmOrUpdate(currentArtist);
+            }
+        });
+
+        Log.e(LOG_TAG, "Artist id: " + artist.getId());
+    }
+
+    @OnClick(R.id.log_artist)
+    public void log(){
+        RealmResults<Artist> results = realm.where(Artist.class).findAll();
+        Log.e(LOG_TAG, results + "\n");
     }
 
     @Override
