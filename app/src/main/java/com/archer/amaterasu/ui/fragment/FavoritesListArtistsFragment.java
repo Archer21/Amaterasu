@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,20 +21,36 @@ import com.archer.amaterasu.utils.ItemOffsetDecoration;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FavoritesListArtistsFragment extends BaseFragment {
 
+    private static final String LOG_TAG = FavoritesListArtistsFragment.class.getSimpleName();
     @Bind(R.id.favorites_artists_recycler_list)
     RecyclerView recyclerList;
 
     FavoriteArtistListAdapter adapter;
+//    Realm realm;
 
     public FavoritesListArtistsFragment() {
         // Required empty public constructor
     }
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        realm = Realm.getDefaultInstance();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        realm.close();
+//    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,8 +63,16 @@ public class FavoritesListArtistsFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState == null){
             setupListConfiguration();
-            setDummieContent();
+//            setDummieContent();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        RealmResults<Artist> results = getRealm().where(Artist.class).findAll();
+        adapter.addAll(results);
+        Log.e(LOG_TAG, results + "\n");
     }
 
     private void setupListConfiguration(){

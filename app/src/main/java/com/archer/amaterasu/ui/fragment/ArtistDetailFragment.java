@@ -1,12 +1,12 @@
 package com.archer.amaterasu.ui.fragment;
 
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,16 +65,28 @@ public class ArtistDetailFragment extends SetupTabsLayout {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         realm = Realm.getDefaultInstance();
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDetach() {
+        super.onDetach();
         realm.close();
     }
+
+    //    @Override
+//    public void onStart() {
+//        super.onStart();
+//        realm = Realm.getDefaultInstance();
+//    }
+
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        realm.close();
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

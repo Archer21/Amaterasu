@@ -7,15 +7,28 @@ import android.support.v7.widget.Toolbar;
 import com.archer.amaterasu.R;
 
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 public abstract class BaseActivity extends AppCompatActivity {
     private Toolbar mToolbar;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
         injectViews();
+        realm = Realm.getDefaultInstance();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
+
+    public Realm getRealm() {
+        return realm;
     }
 
     public void setupToolbar() {

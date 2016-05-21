@@ -10,10 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 public abstract class BaseFragment extends Fragment{
     protected Context CONTEXT;
-
+    private Realm realm;
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -34,6 +35,7 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public void onStart() {
         super.onStart();
+        realm = Realm.getDefaultInstance();
         if (getPresenter() != null){
             getPresenter().onStart();
         }
@@ -42,6 +44,7 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public void onStop() {
         super.onStop();
+        realm.close();
         if (getPresenter() != null){
             getPresenter().onStop();
         }
@@ -52,6 +55,10 @@ public abstract class BaseFragment extends Fragment{
         super.onDestroyView();
         unbindViews();
 
+    }
+
+    public Realm getRealm() {
+        return realm;
     }
 
     protected abstract int getFragmentLayout();

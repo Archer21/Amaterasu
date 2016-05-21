@@ -11,22 +11,23 @@ import com.archer.amaterasu.domain.Artist;
 import com.archer.amaterasu.ui.holder.FavoritesListArtistsViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FavoriteArtistListAdapter extends RecyclerView.Adapter<FavoritesListArtistsViewHolder>{
 
     Context context;
-    ArrayList<Artist> favoriteArtistList;
+    List<Artist> favoriteArtistList;
 
     public FavoriteArtistListAdapter(Context context) {
         this.context = context;
         this.favoriteArtistList = new ArrayList<>();
     }
 
-    public void addAll(ArrayList<Artist> artists) {
+    public void addAll(List<Artist> artists) {
         if (artists == null)
             throw new NullPointerException("The items cannot be null");
 
-        this.favoriteArtistList.addAll(artists);
+        this.favoriteArtistList = artists;
         notifyItemRangeInserted(getItemCount() - 1, artists.size());
     }
 
