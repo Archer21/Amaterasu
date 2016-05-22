@@ -25,6 +25,8 @@ import com.archer.amaterasu.ui.activity.ArtistDetailActivity;
 import com.archer.amaterasu.ui.activity.SongDetailActivity;
 import com.archer.amaterasu.ui.adapter.TopSongsAdapter;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -49,7 +51,14 @@ public class TopSongsFragment extends BaseFragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        topSongsAdapter = new TopSongsAdapter(CONTEXT);
+        topSongsAdapter = new TopSongsAdapter(CONTEXT, new TopSongsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Song item) {
+                Intent intent = new Intent(CONTEXT, SongDetailActivity.class);
+                intent.putExtra("SONG", Parcels.wrap(item));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -98,7 +107,6 @@ public class TopSongsFragment extends BaseFragment{
 
 
     public void setupList() {
-        topSongsAdapter = new TopSongsAdapter(CONTEXT);
         recyclerList.setLayoutManager(new GridLayoutManager(getActivity(), NUM_COLS));
         recyclerList.setAdapter(topSongsAdapter);
     }

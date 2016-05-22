@@ -43,11 +43,13 @@ public class SongDeserializer implements JsonDeserializer<SongResponse>{
             JsonArray imagesArray = songData.get(SongKeys.SONG_IMAGES_ARRAY).getAsJsonArray();
             HashMap<Integer, String> songImages = extractImagesFromJsonArray(imagesArray);
 
+            currentSong.setId(id);
             currentSong.setSongTitle(title);
             currentSong.setSongArtist(artist);
             currentSong.setSongViews(views);
             currentSong.setSongRating(rating);
             currentSong.setSongImageSmall(songImages.get(0));
+            currentSong.setSongImageMedium(songImages.get(1));
             songs.add(currentSong);
         }
         return songs;

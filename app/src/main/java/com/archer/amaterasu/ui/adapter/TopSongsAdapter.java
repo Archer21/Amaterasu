@@ -22,10 +22,13 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
 
     ArrayList<Song> listSongs;
     Context context;
+    OnItemClickListener listener;
 
-    public TopSongsAdapter(Context context) {
+
+    public TopSongsAdapter(Context context, OnItemClickListener listener) {
         this.context = context;
         this.listSongs = new ArrayList<>();
+        this.listener = listener;
     }
 
     @Override
@@ -42,6 +45,7 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
         holder.setName(currentSong.getSongTitle());
         holder.setTopSongRating(currentSong.getSongRating());
         holder.setPlayCount(currentSong.getSongViews());
+        holder.bind(listSongs.get(position), listener);
     }
 
     @Override
@@ -112,6 +116,9 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
         return listSongs.get(position);
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(Song item);
+    }
 
     public class TopSongsViewHolder extends RecyclerView.ViewHolder{
 
@@ -147,6 +154,14 @@ public class TopSongsAdapter extends RecyclerView.Adapter<TopSongsAdapter.TopSon
         }
         public void setPlayCount(int playCount){
             this.topSongPlaycount.setText(playCount + "");
+        }
+
+        public void bind(final Song item, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(item);
+                }
+            });
         }
     }
 }

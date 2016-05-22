@@ -1,5 +1,8 @@
 package com.archer.amaterasu.domain;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Song {
     public  int    id;
     private int    songViews;
