@@ -34,6 +34,7 @@ public class SongDeserializer implements JsonDeserializer<SongResponse>{
         for (int i = 0; i < size; i++) {
             Song currentSong = new Song();
             JsonObject songData = array.get(i).getAsJsonObject();
+            int    id     = songData.get(SongKeys.SONG_ID).getAsInt();
             String title  = songData.get(SongKeys.SONG_TITLE).getAsString();
             String artist = songData.get(SongKeys.SONG_ARTIST).getAsString();
             int    views  = songData.get(SongKeys.SONG_VIEWS).getAsInt();

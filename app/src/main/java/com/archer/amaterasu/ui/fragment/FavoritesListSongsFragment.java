@@ -47,7 +47,7 @@ public class FavoritesListSongsFragment extends BaseFragment {
         recyclerList = (RecyclerView) view.findViewById(R.id.recycler_favorites_songs);
         if (savedInstanceState == null){
             setupListConfiguration();
-            setDummieContent();
+//            setDummieContent();
         }
     }
 

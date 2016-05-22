@@ -11,18 +11,19 @@ import com.archer.amaterasu.domain.ListSong;
 import com.archer.amaterasu.ui.holder.FavoritesListSongsViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FavoritesSongListAdapter extends RecyclerView.Adapter<FavoritesListSongsViewHolder> {
 
     private Context context;
-    private ArrayList<ListSong> listSongs;
+    private List<ListSong> listSongs;
 
     public FavoritesSongListAdapter(Context context) {
         this.context = context;
         this.listSongs = new ArrayList<>();
     }
 
-    public void addAll(ArrayList<ListSong> list) {
+    public void addAll(List<ListSong> list) {
         if (list == null)
             throw new NullPointerException("The items cannot be null");
 

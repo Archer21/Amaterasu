@@ -1,20 +1,29 @@
 package com.archer.amaterasu.domain;
 
 public class Song {
-    private int    songPlaycount;
+    public  int    id;
     private int    songViews;
     private float  songRating;
     private String songTitle;
     private String songArtist;
     private String songImageSmall;
     private String songImageMedium;
+//    private int    songPlaycount;
+//
+//    public int getSongPlaycount() {
+//        return songPlaycount;
+//    }
+//
+//    public void setSongPlaycount(int songPlaycount) {
+//        this.songPlaycount = songPlaycount;
+//    }
 
-    public int getSongPlaycount() {
-        return songPlaycount;
+    public int getId() {
+        return id;
     }
 
-    public void setSongPlaycount(int songPlaycount) {
-        this.songPlaycount = songPlaycount;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getSongViews() {

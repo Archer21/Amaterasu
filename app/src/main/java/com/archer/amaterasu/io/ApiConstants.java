@@ -1,21 +1,5 @@
 package com.archer.amaterasu.io;
 
-
-//"songs": {
-//    "song": [{
-//        "id": 1,
-//        "title": "Kizuna ni Nosete",
-//        "artist": "eyelis",
-//        "images": [{
-//            "small": "http://www.openingsanimes.com/wp-content/uploads/2015/07/Akagami-no-Shirayuki-hime1.jpg?a5f169",
-//            "medium": "https://i1.sndcdn.com/artworks-000131684169-egp2ia-t500x500.jpg"
-//        }],
-//        "views": 1568,
-//        "rating": 4.8,
-//        "year": "2015"
-//    }]
-//}
-
 public class ApiConstants {
     /**
      * Api URL Json Keys https://api.myjson.com/bins/2qtzx
