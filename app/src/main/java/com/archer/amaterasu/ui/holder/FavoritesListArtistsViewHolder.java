@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.archer.amaterasu.R;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

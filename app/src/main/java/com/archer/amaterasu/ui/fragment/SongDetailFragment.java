@@ -5,19 +5,22 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
 import com.archer.amaterasu.common.BasePresenter;
 import com.archer.amaterasu.domain.Song;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.Postprocessor;
+import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.realm.Realm;
+import jp.wasabeef.picasso.transformations.BlurTransformation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,11 +28,11 @@ import io.realm.Realm;
 public class SongDetailFragment extends BaseFragment {
 
     @Bind(R.id.song_background)
-    SimpleDraweeView songBackground;
+    ImageView songBackground;
     @Bind(R.id.song_title)
     TextView songTitle;
     @Bind(R.id.song_image)
-    SimpleDraweeView songImage;
+    ImageView songImage;
     @Bind(R.id.artist_name)
     TextView artistName;
 
@@ -49,6 +52,7 @@ public class SongDetailFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         configSong();
+
     }
 
     @Override
@@ -60,6 +64,7 @@ public class SongDetailFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(getActivity(), view);
+
     }
 
     public void configSong(){
@@ -71,13 +76,18 @@ public class SongDetailFragment extends BaseFragment {
     }
 
     public void setSongBackground(String urlImage){
-        Uri uri = Uri.parse(urlImage);
-        songBackground.setImageURI(uri);
+        Picasso.with(CONTEXT)
+                .load(urlImage)
+                .placeholder(R.drawable.placeholder_image)
+                .transform(new BlurTransformation(CONTEXT, 25))
+                .into(songBackground);
     }
 
     public void setSongImage(String urlImage){
-        Uri uri = Uri.parse(urlImage);
-        songImage.setImageURI(uri);
+        Picasso.with(CONTEXT)
+                .load(urlImage)
+                .placeholder(R.drawable.placeholder_image)
+                .into(songImage);
     }
 
     public void setSongTitle(String title){
