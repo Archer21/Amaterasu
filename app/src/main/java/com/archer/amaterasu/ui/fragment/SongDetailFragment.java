@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import org.parceler.Parcels;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.realm.Realm;
 import jp.wasabeef.picasso.transformations.BlurTransformation;
 
@@ -27,6 +29,7 @@ import jp.wasabeef.picasso.transformations.BlurTransformation;
  */
 public class SongDetailFragment extends BaseFragment {
 
+    private static final String LOG_TAG = SongDetailFragment.class.getSimpleName();
     @Bind(R.id.song_background)
     ImageView songBackground;
     @Bind(R.id.song_title)
@@ -37,7 +40,7 @@ public class SongDetailFragment extends BaseFragment {
     TextView artistName;
 
     Realm realm;
-    Song  currentSong;
+    Song  song;
 
     public SongDetailFragment() {
         // Required empty public constructor
@@ -67,19 +70,41 @@ public class SongDetailFragment extends BaseFragment {
 
     }
 
+
+    // Agregar la cancion a una lista
+//    @OnClick(R.id.button_favorite)
+//    public void add(){
+//        // Se desplegara una caja de dialogo
+//
+//        // Siempre mostrar un editText con un boton
+//        // en caso de no existir una lista poder crear una nueva
+//        // o anadirla a una existente
+//
+//        // Al pulsar sobre crear lista debera crearla y anadir la cancion actual a esa lista
+//        final Song currentSong = song;
+//        realm.executeTransaction(new Realm.Transaction(){
+//            @Override
+//            public void execute(Realm realm) {
+//                realm.copyToRealmOrUpdate(currentSong);
+//            }
+//        });
+//
+//        Log.e(LOG_TAG, "Artist id: " + song.getId());
+//    }
+
     public void configSong(){
-        currentSong = Parcels.unwrap(getActivity().getIntent().getParcelableExtra("SONG"));
-        setSongBackground(currentSong.getSongImageMedium());
-        setSongImage(currentSong.getSongImageSmall());
-        setSongTitle(currentSong.getSongTitle());
-        setSongArtistName(currentSong.getSongArtist());
+        song = Parcels.unwrap(getActivity().getIntent().getParcelableExtra("SONG"));
+        setSongBackground(song.getSongImageMedium());
+        setSongImage(song.getSongImageSmall());
+        setSongTitle(song.getSongTitle());
+        setSongArtistName(song.getSongArtist());
     }
 
     public void setSongBackground(String urlImage){
         Picasso.with(CONTEXT)
                 .load(urlImage)
                 .placeholder(R.drawable.placeholder_image)
-                .transform(new BlurTransformation(CONTEXT, 25))
+                .transform(new BlurTransformation(CONTEXT, 15))
                 .into(songBackground);
     }
 

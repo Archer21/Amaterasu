@@ -2,15 +2,17 @@ package com.archer.amaterasu.domain;
 
 import org.parceler.Parcel;
 
+import io.realm.RealmObject;
+
 @Parcel
-public class Song {
+public class Song extends RealmObject{
     public  int    id;
-    private int    songViews;
-    private float  songRating;
-    private String songTitle;
-    private String songArtist;
-    private String songImageSmall;
-    private String songImageMedium;
+    public int    songViews;
+    public float  songRating;
+    public String songTitle;
+    public String songArtist;
+    public String songImageSmall;
+    public String songImageMedium;
 //    private int    songPlaycount;
 //
 //    public int getSongPlaycount() {
