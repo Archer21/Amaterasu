@@ -46,7 +46,7 @@ public class ArtistDetailFragment extends SetupTabsLayout {
     @Bind(R.id.artist_rank)
     TextView artistRanking;
 
-    Realm realm;
+//    Realm realm;
     Artist artist;
 
     Fragment[] tabsFragments = {
@@ -76,12 +76,12 @@ public class ArtistDetailFragment extends SetupTabsLayout {
 //        realm.close();
 //    }
 
-    //    @Override
+//        @Override
 //    public void onStart() {
 //        super.onStart();
 //        realm = Realm.getDefaultInstance();
 //    }
-
+//
 //    @Override
 //    public void onStop() {
 //        super.onStop();
@@ -126,7 +126,7 @@ public class ArtistDetailFragment extends SetupTabsLayout {
     @OnClick(R.id.add_to_favorite_button)
     public void add(){
         final Artist currentArtist = artist;
-        realm.executeTransaction(new Realm.Transaction(){
+        getRealm().executeTransaction(new Realm.Transaction(){
             @Override
             public void execute(Realm realm) {
                 realm.copyToRealmOrUpdate(currentArtist);
@@ -138,7 +138,7 @@ public class ArtistDetailFragment extends SetupTabsLayout {
 
     @OnClick(R.id.log_artist)
     public void log(){
-        RealmResults<Artist> results = realm.where(Artist.class).findAll();
+        RealmResults<Artist> results = getRealm().where(Artist.class).findAll();
         Log.e(LOG_TAG, results + "\n");
     }
 

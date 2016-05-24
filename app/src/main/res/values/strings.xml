@@ -15,4 +15,8 @@
     <string name="title_activity_artist_detail">ArtistDetailActivity</string>
     <string name="add_list">Add List</string>
     <string name="delete_list">Delete List</string>
+    <string name="input_add_list">Create a new list</string>
+    <string name="input_add_list_content">Content create list</string>
+    <string name="input_add_list_hint">Insert the name of new list</string>
+    <string name="input_add_list_prefill">Prefill</string>
 </resources>

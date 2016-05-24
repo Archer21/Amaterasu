@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
 import com.archer.amaterasu.common.BasePresenter;
@@ -65,11 +67,20 @@ public class FavoritesFragment extends BaseFragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         // handle item selection
         switch (item.getItemId()) {
             case R.id.add_list:
-                Toast.makeText(CONTEXT, "Clicked: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                new MaterialDialog.Builder(CONTEXT)
+                        .title(R.string.input_add_list)
+                        .content(R.string.input_add_list_content)
+                        .inputType(InputType.TYPE_CLASS_TEXT)
+                        .input(R.string.input_add_list_hint, R.string.input_add_list_prefill, new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(MaterialDialog dialog, CharSequence input) {
+                                Toast.makeText(CONTEXT, item.getTitle(), Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
                 return true;
             case R.id.delete_list:
                 Toast.makeText(CONTEXT, "Deleted:" + item.getTitle(), Toast.LENGTH_SHORT).show();
