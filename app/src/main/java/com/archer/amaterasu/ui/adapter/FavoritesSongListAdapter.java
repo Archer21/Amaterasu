@@ -31,15 +31,63 @@ public class FavoritesSongListAdapter extends RecyclerView.Adapter<FavoritesList
         notifyItemRangeInserted(getItemCount() - 1, list.size());
     }
 
+    /**
+     * Add item in the last index
+     *
+     * @param songs The item to be inserted
+     */
+    public void addItem(ListSong songs) {
+        if (songs == null)
+            throw new NullPointerException("The item cannot be null");
+
+        listSongs.add(songs);
+        notifyItemInserted(getItemCount() - 1);
+    }
+
+    /**
+     * Add item in determined index
+     *
+     * @param songs    The event to be inserted
+     * @param position Index for the new event
+     */
+    public void addItem(ListSong songs, int position) {
+        if (songs == null)
+            throw new NullPointerException("The item cannot be null");
+
+        if (position < getItemCount() || position > getItemCount())
+            throw new IllegalArgumentException("The position must be between 0 and lastIndex + 1");
+
+        listSongs.add(position, songs);
+        notifyItemInserted(position);
+    }
+
+
+    public void replace(List<ListSong> songs){
+        this.listSongs = songs;
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Delete all the items
+     * */
+    public void clear() {
+        if (!listSongs.isEmpty()) {
+            listSongs.clear();
+            notifyDataSetChanged();
+        }
+    }
+
+
     @Override
     public FavoritesListSongsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_favorite_song_row, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_favorite_list_song_row, parent, false);
         return new FavoritesListSongsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(FavoritesListSongsViewHolder holder, int position) {
         ListSong currentList = listSongs.get(position);
+        
         holder.setListImage(currentList.getSongs().get(0).getSongImageSmall());
         holder.setListName(currentList.getName());
     }

@@ -33,7 +33,7 @@ public class FavoriteArtistListAdapter extends RecyclerView.Adapter<FavoritesLis
 
     @Override
     public FavoritesListArtistsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.item_favorite_artist_row, parent, false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.item_favorite_list_artist_row, parent, false);
         return new FavoritesListArtistsViewHolder(itemView);
     }
 

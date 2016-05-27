@@ -13,6 +13,8 @@
         fresco:placeholderImage="@drawable/placeholder_image"
         fresco:actualImageScaleType="centerCrop"
         fresco:placeholderImageScaleType="centerCrop"
+        fresco:failureImage="@drawable/empty"
+        fresco:failureImageScaleType="centerCrop"
         />
 
     <LinearLayout

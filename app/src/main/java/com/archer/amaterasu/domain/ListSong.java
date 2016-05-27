@@ -2,10 +2,21 @@ package com.archer.amaterasu.domain;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class ListSong extends RealmObject{
+    @PrimaryKey
+    public String id;
     public String name;
     public RealmList<Song> songs;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

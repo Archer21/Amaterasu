@@ -11,7 +11,7 @@
     <string name="failed_search">No se pudo cargar el contenido</string>
     <string name="network_error">Ocurrio algun problema al hacer la peticion, revise su conexion a internet</string>
     <string name="server_error">Ocurrio algun problema con nuestro seridor</string>
-    <string name="title_activity_song_detail">SongDetailActivity</string>
+    <string name="title_activity_song_detail">Create new list</string>
     <string name="title_activity_artist_detail">ArtistDetailActivity</string>
     <string name="add_list">Add List</string>
     <string name="delete_list">Delete List</string>
@@ -20,3 +20,20 @@
     <string name="input_add_list_hint">Insert the name of new list</string>
     <string name="input_add_list_prefill">Prefill</string>
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

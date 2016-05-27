@@ -36,17 +36,13 @@ public class FavoritesFragment extends BaseFragment {
             new FavoritesListArtistsFragment()
     };
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         addFragments(fragmentTransaction);
+        setHasOptionsMenu(true);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -60,42 +56,17 @@ public class FavoritesFragment extends BaseFragment {
         return null;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_favorites_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        // handle item selection
-        switch (item.getItemId()) {
-            case R.id.add_list:
-                new MaterialDialog.Builder(CONTEXT)
-                        .title(R.string.input_add_list)
-                        .content(R.string.input_add_list_content)
-                        .inputType(InputType.TYPE_CLASS_TEXT)
-                        .input(R.string.input_add_list_hint, R.string.input_add_list_prefill, new MaterialDialog.InputCallback() {
-                            @Override
-                            public void onInput(MaterialDialog dialog, CharSequence input) {
-                                Toast.makeText(CONTEXT, item.getTitle(), Toast.LENGTH_SHORT).show();
-                            }
-                        }).show();
-                return true;
-            case R.id.delete_list:
-                Toast.makeText(CONTEXT, "Deleted:" + item.getTitle(), Toast.LENGTH_SHORT).show();
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     public void addFragments(FragmentTransaction fragmentTransaction){
         fragmentTransaction.add(R.id.favorites_songs_list , fragments[0]);
         fragmentTransaction.add(R.id.favorites_artists_list, fragments[1]);
         fragmentTransaction.commit();
     }
-
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_favorites_menu, menu);
+    }
 }
 
 

@@ -6,10 +6,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
 import com.archer.amaterasu.common.BasePresenter;
@@ -19,8 +26,11 @@ import com.archer.amaterasu.ui.adapter.FavoritesSongListAdapter;
 import com.archer.amaterasu.utils.ItemOffsetDecoration;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import butterknife.Bind;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +40,7 @@ public class FavoritesListSongsFragment extends BaseFragment {
     RecyclerView recyclerList;
 
     private FavoritesSongListAdapter adapter;
+    RealmResults<ListSong> list;
 
     public FavoritesListSongsFragment() {
         // Required empty public constructor
@@ -39,6 +50,13 @@ public class FavoritesListSongsFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new FavoritesSongListAdapter(CONTEXT);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     @Override
@@ -66,6 +84,56 @@ public class FavoritesListSongsFragment extends BaseFragment {
     protected BasePresenter getPresenter() {
         return null;
     }
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.add_list:
+
+                new MaterialDialog.Builder(CONTEXT)
+                        .title(R.string.title_activity_song_detail)
+                        .inputType(InputType.TYPE_CLASS_TEXT)
+                        .input(R.string.input_add_list_hint, R.string.input_add_list_prefill, new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(MaterialDialog dialog, CharSequence input) {
+                                ListSong newList = new ListSong();
+                                newList.setId(UUID.randomUUID().toString());
+                                newList.setName(input.toString());
+                                adapter.addItem(newList);
+                            }
+                        }).show();
+
+                return true;
+            case R.id.delete_list:
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+//    new MaterialDialog.Builder(CONTEXT)
+//                    .title(R.string.input_add_list)
+//                    .content(R.string.input_add_list_content)
+//                    .inputType(InputType.TYPE_CLASS_TEXT)
+//                    .input(R.string.input_add_list_hint, R.string.input_add_list_prefill, new MaterialDialog.InputCallback() {
+//                        @Override
+//                        public void onInput(MaterialDialog dialog, CharSequence input) {
+//                            final ListSong songList = new ListSong();
+//                            songList.setId(UUID.randomUUID().toString());
+//                            songList.setName(input.toString());
+//                            getRealm().executeTransaction(new Realm.Transaction(){
+//                                @Override
+//                                public void execute(Realm realm) {
+//                                    realm.copyToRealmOrUpdate(songList);
+//                                }
+//                            });
+//                            Toast.makeText(CONTEXT, songList.getId(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }).show();
 
 //    public void setDummieContent(){
 //        ArrayList<ListSong> dummieList = new ArrayList<>();
