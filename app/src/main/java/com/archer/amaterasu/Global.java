@@ -13,7 +13,7 @@ public class Global extends Application {
         super.onCreate();
         Fresco.initialize(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this).build();
-        Realm.deleteRealm(realmConfiguration); // Clean slate
+//        Realm.deleteRealm(realmConfiguration); // Clean slate
         Realm.setDefaultConfiguration(realmConfiguration); // Make this Realm the default
     }
 }

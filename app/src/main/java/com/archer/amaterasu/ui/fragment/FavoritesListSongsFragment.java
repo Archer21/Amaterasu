@@ -4,6 +4,7 @@ package com.archer.amaterasu.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -37,6 +38,7 @@ import io.realm.RealmResults;
  */
 public class FavoritesListSongsFragment extends BaseFragment {
 
+    private static final int NUM_COLS = 2;
     RecyclerView recyclerList;
 
     private FavoritesSongListAdapter adapter;
@@ -47,32 +49,26 @@ public class FavoritesListSongsFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        adapter = new FavoritesSongListAdapter(CONTEXT);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
-
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
         recyclerList = (RecyclerView) view.findViewById(R.id.recycler_favorites_songs);
-        if (savedInstanceState == null){
-            setupListConfiguration();
+//        if (savedInstanceState == null){
 //            setDummieContent();
-        }
+//        }
+        setupListConfiguration();
     }
 
     private void setupListConfiguration(){
-        recyclerList.setLayoutManager(new LinearLayoutManager(CONTEXT, LinearLayoutManager.HORIZONTAL, false));
+        adapter = new FavoritesSongListAdapter(CONTEXT);
+        recyclerList.setLayoutManager(new GridLayoutManager(CONTEXT, NUM_COLS));
         recyclerList.setAdapter(adapter);
-        recyclerList.addItemDecoration(new ItemOffsetDecoration(CONTEXT, R.integer.offset));
+        recyclerList.addItemDecoration(new ItemOffsetDecoration(CONTEXT, R.integer.artist_offset));
     }
 
     @Override
@@ -85,8 +81,12 @@ public class FavoritesListSongsFragment extends BaseFragment {
         return null;
     }
 
-
-
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.fragment_favorites_menu, menu);
+    }
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
@@ -104,11 +104,12 @@ public class FavoritesListSongsFragment extends BaseFragment {
                                 newList.setId(UUID.randomUUID().toString());
                                 newList.setName(input.toString());
                                 adapter.addItem(newList);
+                                Toast.makeText(CONTEXT, "Item insertado", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
-
                 return true;
             case R.id.delete_list:
+                Toast.makeText(CONTEXT, "Items borrados", Toast.LENGTH_SHORT).show();
 
             default:
                 return super.onOptionsItemSelected(item);

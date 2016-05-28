@@ -28,6 +28,11 @@ public class FavoritesListSongsViewHolder extends RecyclerView.ViewHolder {
         this.listImage.setImageURI(uri);
     }
 
+
+    public void setEmptyImage(){
+        listImage.setImageResource(R.drawable.empty);
+    }
+
     public void setListName(String name){
         this.listName.setText(name);
     }

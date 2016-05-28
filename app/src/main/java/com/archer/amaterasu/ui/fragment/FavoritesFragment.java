@@ -4,9 +4,11 @@ package com.archer.amaterasu.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,30 +22,49 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
 import com.archer.amaterasu.common.BasePresenter;
+import com.archer.amaterasu.utils.SetupTabsLayout;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoritesFragment extends BaseFragment {
+public class FavoritesFragment extends SetupTabsLayout {
 
-    public FavoritesFragment() {
-        // Required empty public constructor
-    }
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-    Fragment[] fragments = {
+    /**
+     * Required Ids for Tabs
+     */
+    @Bind(R.id.viewPager)
+    ViewPager viewPager;
+    @Bind(R.id.tabLayout)
+    TabLayout tabLayout;
+
+    /**
+     * Required Fragments Array for Tabs
+     */
+    private Fragment[] tabsFragments = {
             new FavoritesListSongsFragment(),
             new FavoritesListArtistsFragment()
     };
 
+    /**
+     * Required Titles String Array for Tabs
+     */
+    private String[] tabsTitles = {
+            "My song list",
+            "My favorite artists"
+    };
+
+    public FavoritesFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fragmentManager = getFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        addFragments(fragmentTransaction);
-        setHasOptionsMenu(true);
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(CONTEXT, view);
+        setupViewPager(viewPager, tabLayout, tabsFragments, tabsTitles);
     }
 
     @Override
@@ -54,18 +75,6 @@ public class FavoritesFragment extends BaseFragment {
     @Override
     protected BasePresenter getPresenter() {
         return null;
-    }
-
-
-    public void addFragments(FragmentTransaction fragmentTransaction){
-        fragmentTransaction.add(R.id.favorites_songs_list , fragments[0]);
-        fragmentTransaction.add(R.id.favorites_artists_list, fragments[1]);
-        fragmentTransaction.commit();
-    }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_favorites_menu, menu);
     }
 }
 

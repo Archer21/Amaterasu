@@ -4,6 +4,7 @@ package com.archer.amaterasu.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,27 +31,15 @@ import io.realm.RealmResults;
 public class FavoritesListArtistsFragment extends BaseFragment {
 
     private static final String LOG_TAG = FavoritesListArtistsFragment.class.getSimpleName();
+    private static final int NUM_COLS = 2;
     @Bind(R.id.favorites_artists_recycler_list)
     RecyclerView recyclerList;
 
     FavoriteArtistListAdapter adapter;
-//    Realm realm;
 
     public FavoritesListArtistsFragment() {
         // Required empty public constructor
     }
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        realm = Realm.getDefaultInstance();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        realm.close();
-//    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,10 +50,7 @@ public class FavoritesListArtistsFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (savedInstanceState == null){
-            setupListConfiguration();
-//            setDummieContent();
-        }
+        setupListConfiguration();
     }
 
     @Override
@@ -76,7 +62,7 @@ public class FavoritesListArtistsFragment extends BaseFragment {
     }
 
     private void setupListConfiguration(){
-        recyclerList.setLayoutManager(new LinearLayoutManager(CONTEXT, LinearLayoutManager.HORIZONTAL, false));
+        recyclerList.setLayoutManager(new GridLayoutManager(CONTEXT, NUM_COLS));
         recyclerList.setAdapter(adapter);
         recyclerList.addItemDecoration(new ItemOffsetDecoration(CONTEXT, R.integer.offset));
     }
@@ -91,35 +77,35 @@ public class FavoritesListArtistsFragment extends BaseFragment {
         return null;
     }
 
-    public void setDummieContent(){
-        ArrayList<Artist> artists= new ArrayList<>();
-
-        Artist eairAoi = new Artist();
-        eairAoi.setPhoto("http://www.sony-asia.com/microsite/hiresaudio/img/artists/thumb_eir_aoi.jpg");
-
-        Artist boa = new Artist();
-        boa.setPhoto("http://images4.fanpop.com/image/photos/21000000/BoA-Kwon-boa-21069379-200-200.png");
-
-        Artist tommyHeavenly = new Artist();
-        tommyHeavenly.setPhoto("http://s3.evcdn.com/images/block200/I0-001/002/118/126-6.jpeg_/tommy-heavenly6-26.jpeg");
-
-        artists.add(eairAoi);
-        artists.add(boa);
-        artists.add(tommyHeavenly);
-
-        artists.add(boa);
-        artists.add(tommyHeavenly);
-        artists.add(eairAoi);
-
-        artists.add(eairAoi);
-        artists.add(tommyHeavenly);
-        artists.add(boa);
-
-        artists.add(eairAoi);
-
-
-        adapter.addAll(artists);
-    }
+//    public void setDummieContent(){
+//        ArrayList<Artist> artists= new ArrayList<>();
+//
+//        Artist eairAoi = new Artist();
+//        eairAoi.setPhoto("http://www.sony-asia.com/microsite/hiresaudio/img/artists/thumb_eir_aoi.jpg");
+//
+//        Artist boa = new Artist();
+//        boa.setPhoto("http://images4.fanpop.com/image/photos/21000000/BoA-Kwon-boa-21069379-200-200.png");
+//
+//        Artist tommyHeavenly = new Artist();
+//        tommyHeavenly.setPhoto("http://s3.evcdn.com/images/block200/I0-001/002/118/126-6.jpeg_/tommy-heavenly6-26.jpeg");
+//
+//        artists.add(eairAoi);
+//        artists.add(boa);
+//        artists.add(tommyHeavenly);
+//
+//        artists.add(boa);
+//        artists.add(tommyHeavenly);
+//        artists.add(eairAoi);
+//
+//        artists.add(eairAoi);
+//        artists.add(tommyHeavenly);
+//        artists.add(boa);
+//
+//        artists.add(eairAoi);
+//
+//
+//        adapter.addAll(artists);
+//    }
 }
 
 
