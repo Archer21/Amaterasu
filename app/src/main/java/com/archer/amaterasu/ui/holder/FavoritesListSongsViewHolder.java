@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.archer.amaterasu.R;
+import com.archer.amaterasu.domain.ListSong;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.Bind;

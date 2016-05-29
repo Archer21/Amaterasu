@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +32,7 @@ import java.util.UUID;
 
 import butterknife.Bind;
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 /**
@@ -39,10 +41,10 @@ import io.realm.RealmResults;
 public class FavoritesListSongsFragment extends BaseFragment {
 
     private static final int NUM_COLS = 2;
+    private static final String LOG_TAG = FavoritesListSongsFragment.class.getSimpleName();
     RecyclerView recyclerList;
 
     private FavoritesSongListAdapter adapter;
-    RealmResults<ListSong> list;
 
     public FavoritesListSongsFragment() {
         // Required empty public constructor
@@ -51,6 +53,9 @@ public class FavoritesListSongsFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        RealmResults<ListSong> results = getRealm().where(ListSong.class).findAll();
+        adapter.addAll(results);
+        Log.e(LOG_TAG, results + "\n");
     }
 
     @Override
@@ -100,11 +105,19 @@ public class FavoritesListSongsFragment extends BaseFragment {
                         .input(R.string.input_add_list_hint, R.string.input_add_list_prefill, new MaterialDialog.InputCallback() {
                             @Override
                             public void onInput(MaterialDialog dialog, CharSequence input) {
-                                ListSong newList = new ListSong();
+                                final ListSong newList = new ListSong();
                                 newList.setId(UUID.randomUUID().toString());
                                 newList.setName(input.toString());
                                 adapter.addItem(newList);
-                                Toast.makeText(CONTEXT, "Item insertado", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CONTEXT, "Item insertado al adaptador", Toast.LENGTH_SHORT).show();
+                                getRealm().executeTransaction(new Realm.Transaction(){
+                                    @Override
+                                    public void execute(Realm realm) {
+                                        newList.setSongs(null);
+                                        realm.copyToRealmOrUpdate(newList);
+                                    }
+                                });
+                                log();
                             }
                         }).show();
                 return true;
@@ -114,6 +127,10 @@ public class FavoritesListSongsFragment extends BaseFragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void log(){
+        RealmResults<ListSong> results = getRealm().where(ListSong.class).findAll();
+        Log.e(LOG_TAG, results + "\n");
     }
 
 //    new MaterialDialog.Builder(CONTEXT)

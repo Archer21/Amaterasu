@@ -64,29 +64,6 @@ public class ArtistDetailFragment extends SetupTabsLayout {
         // Required empty public constructor
     }
 
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        realm = Realm.getDefaultInstance();
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        realm.close();
-//    }
-
-//        @Override
-//    public void onStart() {
-//        super.onStart();
-//        realm = Realm.getDefaultInstance();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        realm.close();
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
