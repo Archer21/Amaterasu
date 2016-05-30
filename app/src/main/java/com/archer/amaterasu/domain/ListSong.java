@@ -8,6 +8,7 @@ public class ListSong extends RealmObject{
     @PrimaryKey
     public String id;
     public String name;
+    public int listSize;
     public RealmList<Song> songs;
 
     public String getId() {
@@ -24,6 +25,14 @@ public class ListSong extends RealmObject{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getListSize() {
+        return listSize;
+    }
+
+    public void setListSize(int listSize) {
+        this.listSize = listSize;
     }
 
     public RealmList<Song> getSongs() {

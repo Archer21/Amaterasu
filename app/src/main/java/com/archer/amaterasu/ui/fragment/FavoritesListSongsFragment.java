@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
@@ -42,12 +43,19 @@ public class FavoritesListSongsFragment extends BaseFragment {
 
     private static final int NUM_COLS = 2;
     private static final String LOG_TAG = FavoritesListSongsFragment.class.getSimpleName();
+    @Bind(R.id.recycler_favorites_songs)
     RecyclerView recyclerList;
 
-    private FavoritesSongListAdapter adapter;
+    FavoritesSongListAdapter adapter;
 
     public FavoritesListSongsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapter = new FavoritesSongListAdapter(CONTEXT);
     }
 
     @Override
@@ -55,22 +63,18 @@ public class FavoritesListSongsFragment extends BaseFragment {
         super.onResume();
         RealmResults<ListSong> results = getRealm().where(ListSong.class).findAll();
         adapter.addAll(results);
-        Log.e(LOG_TAG, results + "\n");
+        Log.e(LOG_TAG, String.valueOf(adapter.getItemCount()));
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(CONTEXT, view);
         setHasOptionsMenu(true);
-        recyclerList = (RecyclerView) view.findViewById(R.id.recycler_favorites_songs);
-//        if (savedInstanceState == null){
-//            setDummieContent();
-//        }
         setupListConfiguration();
     }
 
     private void setupListConfiguration(){
-        adapter = new FavoritesSongListAdapter(CONTEXT);
         recyclerList.setLayoutManager(new GridLayoutManager(CONTEXT, NUM_COLS));
         recyclerList.setAdapter(adapter);
         recyclerList.addItemDecoration(new ItemOffsetDecoration(CONTEXT, R.integer.artist_offset));
@@ -89,7 +93,6 @@ public class FavoritesListSongsFragment extends BaseFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
         inflater.inflate(R.menu.fragment_favorites_menu, menu);
     }
 
@@ -108,16 +111,17 @@ public class FavoritesListSongsFragment extends BaseFragment {
                                 final ListSong newList = new ListSong();
                                 newList.setId(UUID.randomUUID().toString());
                                 newList.setName(input.toString());
+                                newList.setListSize(0);
                                 adapter.addItem(newList);
                                 Toast.makeText(CONTEXT, "Item insertado al adaptador", Toast.LENGTH_SHORT).show();
                                 getRealm().executeTransaction(new Realm.Transaction(){
                                     @Override
                                     public void execute(Realm realm) {
-                                        newList.setSongs(null);
+//                                        newList.setSongs(null);
                                         realm.copyToRealmOrUpdate(newList);
+                                        log();
                                     }
                                 });
-                                log();
                             }
                         }).show();
                 return true;

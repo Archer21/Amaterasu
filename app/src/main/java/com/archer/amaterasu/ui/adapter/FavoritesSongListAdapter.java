@@ -89,12 +89,15 @@ public class FavoritesSongListAdapter extends RecyclerView.Adapter<FavoritesList
         ListSong currentList = listSongs.get(position);
 
         if(currentList.getSongs() != null){
-            holder.setListImage(currentList.getSongs().get(0).getSongImageSmall());
+            if(currentList.getListSize() > 0){
+                holder.setListImage(context, currentList.getSongs().get(0).getSongImageSmall());
+            }
         } else {
-            holder.setEmptyImage();
+            holder.setEmptyImage(context);
         }
 
         holder.setListName(currentList.getName());
+        holder.setListSize(currentList.getListSize());
     }
 
     @Override

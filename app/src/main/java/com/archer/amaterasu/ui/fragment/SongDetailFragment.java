@@ -71,27 +71,6 @@ public class SongDetailFragment extends BaseFragment {
     }
 
 
-    // Agregar la cancion a una lista
-//    @OnClick(R.id.button_favorite)
-//    public void add(){
-//        // Se desplegara una caja de dialogo
-//
-//        // Siempre mostrar un editText con un boton
-//        // en caso de no existir una lista poder crear una nueva
-//        // o anadirla a una existente
-//
-//        // Al pulsar sobre crear lista debera crearla y anadir la cancion actual a esa lista
-//        final Song currentSong = song;
-//        realm.executeTransaction(new Realm.Transaction(){
-//            @Override
-//            public void execute(Realm realm) {
-//                realm.copyToRealmOrUpdate(currentSong);
-//            }
-//        });
-//
-//        Log.e(LOG_TAG, "Artist id: " + song.getId());
-//    }
-
     public void configSong(){
         song = Parcels.unwrap(getActivity().getIntent().getParcelableExtra("SONG"));
         setSongBackground(song.getSongImageMedium());
