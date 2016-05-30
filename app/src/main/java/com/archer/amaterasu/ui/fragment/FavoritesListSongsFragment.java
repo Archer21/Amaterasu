@@ -70,7 +70,6 @@ public class FavoritesListSongsFragment extends BaseFragment {
 
         RealmResults<ListSong> results = getRealm().where(ListSong.class).findAll();
         adapter.addAll(results);
-        Log.e(LOG_TAG, String.valueOf(adapter.getItemCount()));
     }
 
     @Override
@@ -120,13 +119,11 @@ public class FavoritesListSongsFragment extends BaseFragment {
                                 newList.setName(input.toString());
                                 newList.setListSize(0);
                                 adapter.addItem(newList);
-                                Toast.makeText(CONTEXT, "Item insertado al adaptador", Toast.LENGTH_SHORT).show();
                                 getRealm().executeTransaction(new Realm.Transaction(){
                                     @Override
                                     public void execute(Realm realm) {
 //                                        newList.setSongs(null);
                                         realm.copyToRealmOrUpdate(newList);
-                                        log();
                                     }
                                 });
                             }
