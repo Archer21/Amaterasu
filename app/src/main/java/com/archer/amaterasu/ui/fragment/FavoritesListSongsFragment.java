@@ -61,6 +61,13 @@ public class FavoritesListSongsFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+
+//        Al cargar las listas desde realm nos muestra la parte de la imagen
+//        en blanco porq solo ponemos la imagen al adaptador, nunca ponemos
+//        una imagen a la lista y la guardamos en Realm, por eso debemos
+//        agregar un campo de imagen a las listas de canciones y en el holder
+//        y adapter con setCover implementar la misma logica.
+
         RealmResults<ListSong> results = getRealm().where(ListSong.class).findAll();
         adapter.addAll(results);
         Log.e(LOG_TAG, String.valueOf(adapter.getItemCount()));
@@ -136,26 +143,6 @@ public class FavoritesListSongsFragment extends BaseFragment {
         RealmResults<ListSong> results = getRealm().where(ListSong.class).findAll();
         Log.e(LOG_TAG, results + "\n");
     }
-
-//    new MaterialDialog.Builder(CONTEXT)
-//                    .title(R.string.input_add_list)
-//                    .content(R.string.input_add_list_content)
-//                    .inputType(InputType.TYPE_CLASS_TEXT)
-//                    .input(R.string.input_add_list_hint, R.string.input_add_list_prefill, new MaterialDialog.InputCallback() {
-//                        @Override
-//                        public void onInput(MaterialDialog dialog, CharSequence input) {
-//                            final ListSong songList = new ListSong();
-//                            songList.setId(UUID.randomUUID().toString());
-//                            songList.setName(input.toString());
-//                            getRealm().executeTransaction(new Realm.Transaction(){
-//                                @Override
-//                                public void execute(Realm realm) {
-//                                    realm.copyToRealmOrUpdate(songList);
-//                                }
-//                            });
-//                            Toast.makeText(CONTEXT, songList.getId(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    }).show();
 
 //    public void setDummieContent(){
 //        ArrayList<ListSong> dummieList = new ArrayList<>();
