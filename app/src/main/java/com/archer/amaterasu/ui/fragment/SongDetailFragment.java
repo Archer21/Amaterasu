@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
 import com.archer.amaterasu.common.BasePresenter;
+import com.archer.amaterasu.domain.ListSong;
 import com.archer.amaterasu.domain.Song;
 import com.facebook.imagepipeline.request.Postprocessor;
 import com.squareup.picasso.Picasso;
@@ -39,8 +41,11 @@ public class SongDetailFragment extends BaseFragment {
     @Bind(R.id.artist_name)
     TextView artistName;
 
-    Realm realm;
     Song  song;
+
+//    Obtendremos los ids de las listas guardadas en SharedPreferences
+//    dependiendo el caso armaremos un Array con ellas
+
 
     public SongDetailFragment() {
         // Required empty public constructor
@@ -100,6 +105,29 @@ public class SongDetailFragment extends BaseFragment {
 
     public void setSongArtistName(String name){
         artistName.setText(name);
+    }
+
+    @OnClick(R.id.button_favorite)
+    public void addToFavorites(){
+        new MaterialDialog.Builder(CONTEXT)
+                .title("Add song to:")
+                .items(IDsListSongsArray)
+                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View view, int which, final CharSequence text) {
+                        getRealm().executeTransaction(new Realm.Transaction(){
+                            @Override
+                            public void execute(Realm realm) {
+                                ListSong list = getRealm().where(ListSong.class).equalTo("name", text.toString()).findFirst();
+                                list.getSongs().add(song);
+                                getRealm().copyToRealmOrUpdate(list);
+                            }
+                        });
+                        return true;
+                    }
+                })
+                .positiveText("Agregar")
+                .show();
     }
 }
 

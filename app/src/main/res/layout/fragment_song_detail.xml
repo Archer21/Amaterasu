@@ -68,7 +68,6 @@
         <ImageButton
             android:id="@+id/button_favorite"
             android:scaleType="centerCrop"
-
             android:background="@color/colorPrimaryDark"
             android:src="@drawable/ic_star_border_white_24dp"
             android:layout_marginLeft="15dp"
