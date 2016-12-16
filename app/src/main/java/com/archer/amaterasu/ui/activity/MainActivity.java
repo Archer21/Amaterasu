@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.ui.fragment.HomeFragment;
-import com.archer.amaterasu.ui.fragment.MainFragment;
 import com.archer.amaterasu.ui.fragment.SearchFragment;
 import com.archer.amaterasu.utils.SetupNavigationDrawer;
 
@@ -39,7 +38,7 @@ public class MainActivity extends SetupNavigationDrawer {
         setupToolbar(toolbar);
         configDrawer(R.string.open_drawer, R.string.close_drawer);
         if (savedInstanceState == null) {
-            setupFragment(new MainFragment());
+            setupFragment(new HomeFragment());
         }
     }
 
@@ -80,7 +79,7 @@ public class MainActivity extends SetupNavigationDrawer {
         int id = item.getItemId();
 
         if (id == R.id.drawer_home) {
-            setupFragment(new MainFragment());
+            setupFragment(new HomeFragment());
         } else if (id == R.id.drawer_search) {
             setupFragment(new SearchFragment());
         } else if (id == R.id.drawer_log_out) {
