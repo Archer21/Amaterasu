@@ -4,6 +4,12 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+
+import com.archer.amaterasu.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by alanaliaga on 15/12/16.
@@ -11,8 +17,8 @@ import android.support.v7.widget.Toolbar;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
 
 //  OVERRIDED LIFECYCLE METHODS
@@ -23,15 +29,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         // Setup the layout, toolbar and bind all used views
 
         setContentView(getLayout());
+        injectViews();
         setupToolbar();
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Clear the references to the used views
-    }
-
 
     //  METHODS THAT THE ACTIVITY CAN USE
 
@@ -40,6 +40,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             // will be automatically injected with butterknife
             // if a toolbar was defined
             setSupportActionBar(toolbar);
+        } else {
+            Log.e("BaseActivity", "ERROR IN THIS IMPLEMENTATION");
         }
     }
 
@@ -47,6 +49,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         return toolbar;
     }
 
+
+    public void injectViews () {
+        ButterKnife.bind(this);
+    }
 
 
 //  ABSTRACT METHODS THAT ALL ACTIVITIES WILL OVERRIDE

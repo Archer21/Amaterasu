@@ -1,3 +1,46 @@
 <resources>
+    <!-- Global app strings -->
     <string name="app_name">Amaterasu</string>
+    <string name="title_activity_reference">ReferenceActivity</string>
+
+    <!-- Global placeholders -->
+    <string name="placeholder_username">Allen Walker</string>
+    <string name="placeholder_email">allenWalker21@gmail.com</string>
+    <string name="drawer_home_item">Home</string>
+    <string name="drawer_search_item">Buscar</string>
+    <string name="configuracion_item">Configuracion</string>
+    <string name="log_out_item">Cerrar sesion</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
