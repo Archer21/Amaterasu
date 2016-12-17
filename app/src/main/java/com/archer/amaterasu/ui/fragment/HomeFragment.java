@@ -41,7 +41,6 @@ public class HomeFragment extends SetupTabLayout {
             "Hyped artists"
     };
 
-
     // FRAGMENT LIFECYCLE OVERRIDED METHODS
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
