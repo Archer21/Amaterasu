@@ -14,14 +14,6 @@ import butterknife.BindView;
  * A simple {@link Fragment} subclass.
  */
 public class SearchFragment extends BaseFragment {
-
-    // VIEWS BINDED BY BUTTERKNIFE
-
-    @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
-    @BindView(R.id.viewpager)
-    ViewPager viewPager;
-
     @Override
     public int getFragmentLayout() {
         return R.layout.fragment_search;

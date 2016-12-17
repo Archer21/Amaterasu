@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public abstract class SetupTabLayout extends BaseFragment {
 
-    public void setupViewPage (ViewPager viewPager, TabLayout tabLayout, Fragment[] fragments, String[] tabsTitles) {
+    public void setupTabs (ViewPager viewPager, TabLayout tabLayout, Fragment[] fragments, String[] tabsTitles) {
         viewPager.setAdapter(new PagerAdapter(getChildFragmentManager(), buildFragments(fragments)));
         tabLayout.setupWithViewPager(viewPager);
         setTabsName(tabLayout, tabsTitles);
