@@ -14,10 +14,10 @@
     <!-- Navigation Drawer strings -->
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
-    <string name="title_hot_song_item">Courage</string>
-    <string name="artist_hot_song_item">Haruka Tomatsu</string>
-    <string name="time_hot_song_item">4:23</string>
-    <string name="likes_hot_song_item">1285</string>
+    <string name="card_title_hot_song_item">Courage</string>
+    <string name="card_artist_hot_song_item">Haruka Tomatsu</string>
+    <string name="card_duration_hot_song_item">4:23</string>
+    <string name="card_likes_hot_song_item">1285</string>
 </resources>
 
 

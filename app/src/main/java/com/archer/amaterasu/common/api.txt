@@ -1,0 +1,121 @@
+{
+	"songs": {
+		"song": [{
+			"id": 1,
+			"title": "Kizuna ni Nosete",
+			"artist": "eyelis",
+			"images": [{
+				"small": "http://www.openingsanimes.com/wp-content/uploads/2015/07/Akagami-no-Shirayuki-hime1.jpg?a5f169",
+				"medium": "https://i1.sndcdn.com/artworks-000131684169-egp2ia-t500x500.jpg"
+			}],
+			"likes": 1568,
+			"duration": "4:23",
+		    "rating": 5.0,
+			"year": "2015"
+		}, {
+			"id": 2,
+			"title": "Zoetrope",
+			"artist": " Yanagi Nagi",
+			"images": [{
+				"small": "https://s-media-cache-ak0.pinimg.com/236x/89/83/2f/89832f071c4561d6d85b19758a8f3930.jpg",
+				"medium": "http://www.openingsanimes.com/wp-content/uploads/2013/02/583501.jpg?a5f169"
+			}],
+			"likes": 1200,
+			"duration": "4:10",
+		    "rating": 4.1,
+			"year": "2010"
+		}, {
+			"id": 3,
+			"title": "Masayume Chasing",
+			"artist": "BoA",
+			"images": [{
+				"small": "http://3.bp.blogspot.com/-pn8868Dg9rY/VaPNCH9HPSI/AAAAAAAAAJg/V4lrsoM1ZR4/s600/Fairy%2BTail.jpg",
+				"medium": "http://www.openingsanimes.com/wp-content/uploads/2014/06/Fairy-Tail-2014.jpg?a5f169"
+			}],
+			"likes": 1050,
+			"duration": "3:50",
+		    "rating": 4.7,
+			"year": "2014"
+		}, {
+			"id": 4,
+			"title": "Kibou no Uta",
+			"artist": "Ultra Tower",
+			"images": [{
+				"small": "http://www.openingsanimes.com/wp-content/uploads/2015/04/shokug.png?a5f169",
+				"medium": "http://www.openingsanimes.com/wp-content/uploads/2014/07/cover114.jpg?a5f169"
+			}],
+			"likes": 2308,
+			"duration": "4:42",
+		    "rating": 5.0,
+			"year": "2015"
+		}, {
+			"id": 5,
+			"title": "Sugar Sweet Nightmare",
+			"artist": "Yui Horie",
+			"images": [{
+				"small": "http://www.openingsanimes.com/wp-content/uploads/2013/10/Nekomonogatari-Shiro-OP-Single-Chocolate-Insomnia.jpg?a5f169",
+				"medium": "http://s1.hulkshare.com/song_images/original/3/c/e/3ce99710b54b7389af127e0df908aac4.jpg?dd=1411372403"
+			}],
+			"likes": 952,
+			"duration": "4:00",
+		    "rating": 4.0,
+			"year": "2012"
+		}, {
+			"id": 6,
+			"title": "Aozora No Namida",
+			"artist": "Hitomi Takahashi",
+			"images": [{
+				"small": "http://news.mynavi.jp/news/2006/07/21/322.jpg",
+				"medium": "http://www.openingsanimes.com/wp-content/uploads/2011/09/blood-anime-0987651234.jpg?a5f169"
+			}],
+			"likes": 918,
+			"duration": "3:10",
+		    "rating": 3.9,
+			"year": "2005"
+		}, {
+			"id": 7,
+			"title": "Pray",
+			"artist": "Tommy heavenly6",
+			"images": [{
+				"small": "http://cdn.animeflv.net/img/portada/1909.jpg",
+				"medium": "http://www.openingsanimes.com/wp-content/uploads/2012/06/Gintama.jpg?a5f169"
+			}],
+			"views": 1892,
+			"rating": 4.2,
+			"year": "2005"
+		}, {
+			"id": 8,
+			"title": "Brave Shine",
+			"artist": "Aimer",
+			"images": [{
+				"small": "http://cdn.animeflv.us/images/fate-stay-night-unlimited-blade-works-2.png",
+				"medium": "https://i1.sndcdn.com/artworks-000129915101-u0a0fe-t500x500.jpg"
+			}],
+			"views": 1700,
+			"rating": 4.7,
+			"year": "2015"
+		}, {
+			"id": 9,
+			"title": "Courage",
+			"artist": "Haruka Tomatsu",
+			"images": [{
+				"small": "http://1.bp.blogspot.com/-9a7oNW8eWHE/Vk4_ha9qwPI/AAAAAAAAK90/0hRYpT9DbvQ/s1600/sword-art-online-capitulos-completos-descargar.jpg",
+				"medium": "http://vignette1.wikia.nocookie.net/swordartonline/images/1/12/Sword_Art_Online_II_Opening_2_Courage/revision/20141021160447"
+			}],
+			"views": 2150,
+			"rating": 5.0,
+			"year": "2014"
+		}, {
+			"id": 10,
+			"title": "X.U",
+			"artist": "Sawano Hiroyuki",
+			"images": [{
+				"small": "http://www.openingsanimes.com/wp-content/uploads/2015/04/owari_ser.jpg?a5f169",
+				"medium": "http://onlinefanatic.com/wp-content/uploads/2015/07/Anime-Like-Seraph-of-the-End.jpg"
+			}],
+			"views": 1687,
+			"rating": 4.7,
+			"year": "2015"
+		}]
+	}
+}

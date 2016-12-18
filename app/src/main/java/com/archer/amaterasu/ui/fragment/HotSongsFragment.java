@@ -8,25 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.archer.amaterasu.R;
+import com.archer.amaterasu.common.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HotSongsFragment extends Fragment {
-
-
-    public HotSongsFragment() {
-        // Required empty public constructor
-    }
-
+public class HotSongsFragment extends BaseFragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hot_songs, container, false);
+    public int getFragmentLayout() {
+        return R.layout.fragment_hot_songs;
     }
-
 }
 
 

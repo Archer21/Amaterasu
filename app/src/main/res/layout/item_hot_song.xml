@@ -2,8 +2,8 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="172dp"
-    android:layout_height="192dp"
+    android:layout_width="@dimen/card_hot_song_width"
+    android:layout_height="@dimen/card_hot_song_height"
     app:cardElevation="4dp"
     app:cardCornerRadius="4dp"
     app:cardBackgroundColor="@android:color/black">
@@ -16,31 +16,37 @@
             android:id="@+id/title_hot_song_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:textSize="@dimen/title_hot_song_item"
+            android:paddingTop="@dimen/card_hot_song_default_dimen"
+            android:paddingLeft="@dimen/card_hot_song_default_dimen"
+            android:paddingStart="@dimen/card_hot_song_default_dimen"
+            android:textSize="@dimen/card_title_hot_song"
             android:textColor="@color/colorAccent"
-            android:text="@string/title_hot_song_item" />
+            android:text="@string/card_title_hot_song_item" />
 
         <TextView
             android:id="@+id/artist_hot_song_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:textSize="@dimen/artist_hot_song_item"
+            android:paddingLeft="@dimen/card_hot_song_default_dimen"
+            android:paddingStart="@dimen/card_hot_song_default_dimen"
+            android:textSize="@dimen/card_artist_hot_song"
             android:textColor="@color/textIconsColors"
-            android:text="@string/artist_hot_song_item"
+            android:text="@string/card_artist_hot_song_item"
             android:layout_below="@+id/title_hot_song_item"/>
 
 
+        <!--android:layout_centerInParent="true"-->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_hot_song_item"
-            android:layout_width="86dp"
-            android:layout_height="96dp"
-            android:layout_centerInParent="true"
+            android:layout_width="@dimen/card_hot_song_circle_image_width"
+            android:layout_height="@dimen/card_hot_song_circle_image_height"
+            android:layout_below="@+id/artist_hot_song_item"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/card_hot_song_double_default"
             android:src="@drawable/eair_aoi"
             android:scaleType="centerCrop"
             app:civ_border_color="@color/colorAccent"
-            app:civ_border_width="4dp"/>
+            app:civ_border_width="@dimen/card_hot_song_default_dimen"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -50,14 +56,14 @@
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/time_hot_song_item"
+                android:id="@+id/duration_hot_song_item"
                 android:layout_width="0dp"
                 android:background="@color/colorPrimaryDark"
                 android:layout_height="wrap_content"
-                android:padding="2dp"
+                android:padding="@dimen/card_hot_song_default_dimen"
                 android:textColor="@color/textIconsColors"
-                android:textSize="@dimen/time_hot_song_item"
-                android:text="@string/time_hot_song_item"
+                android:textSize="@dimen/card_time_hot_song"
+                android:text="@string/card_duration_hot_song_item"
                 android:layout_weight="0.5"
                 android:gravity="end"
                 android:drawableLeft="@mipmap/ic_menu"
@@ -68,12 +74,12 @@
                 android:layout_width="0dp"
                 android:background="@color/colorAccent"
                 android:layout_height="wrap_content"
-                android:padding="2dp"
+                android:padding="4dp"
                 android:textColor="@color/textIconsColors"
-                android:textSize="@dimen/time_hot_song_item"
-                android:text="@string/likes_hot_song_item"
+                android:textSize="@dimen/card_time_hot_song"
+                android:text="@string/card_likes_hot_song_item"
                 android:layout_weight="0.5"
-                android:gravity="right"
+                android:gravity="end"
                 android:drawableLeft="@mipmap/ic_home"
                 android:drawableStart="@mipmap/ic_home" />
 
