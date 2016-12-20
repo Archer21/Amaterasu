@@ -18,11 +18,11 @@
     <dimen name="card_hot_song_width">172dp</dimen>
     <dimen name="card_hot_song_height">192dp</dimen>
     <dimen name="card_hot_song_elevation">4dp</dimen>
-    <dimen name="card_hot_song_default_dimen">4dp</dimen>
+    <dimen name="card_hot_song_default_dimen">2dp</dimen>
     <dimen name="card_hot_song_double_default">8dp</dimen>
     <dimen name="card_hot_song_corner_radius">4dp</dimen>
-    <dimen name="card_hot_song_circle_image_width">86dp</dimen>
-    <dimen name="card_hot_song_circle_image_height">96dp</dimen>
+    <dimen name="card_hot_song_circle_image_width">96dp</dimen>
+    <dimen name="card_hot_song_circle_image_height">106dp</dimen>
 
 
 </resources>

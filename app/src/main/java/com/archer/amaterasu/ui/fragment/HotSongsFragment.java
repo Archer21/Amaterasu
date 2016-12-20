@@ -16,6 +16,7 @@ import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
 import com.archer.amaterasu.domain.Song;
 import com.archer.amaterasu.ui.adapter.HotSongAdapter;
+import com.archer.amaterasu.utils.ItemOffsetDecoration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +60,7 @@ public class HotSongsFragment extends BaseFragment {
         GridLayoutManager layoutManager = new GridLayoutManager(CONTEXT, NUM_COLS);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new ItemOffsetDecoration(CONTEXT, R.integer.hot_song_card_offset));
     }
 
 
