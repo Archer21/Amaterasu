@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
+import com.archer.amaterasu.common.BasePresenter;
 import com.archer.amaterasu.utils.SetupTabLayout;
 
 import butterknife.BindView;
@@ -54,6 +55,11 @@ public class HomeFragment extends SetupTabLayout {
     @Override
     public int getFragmentLayout() {
         return R.layout.fragment_home;
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return null;
     }
 }
 

@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
+import com.archer.amaterasu.common.BasePresenter;
 
 import butterknife.BindView;
 
@@ -17,6 +18,11 @@ public class SearchFragment extends BaseFragment {
     @Override
     public int getFragmentLayout() {
         return R.layout.fragment_search;
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return null;
     }
 }
 

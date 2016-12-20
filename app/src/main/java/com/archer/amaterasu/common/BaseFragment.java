@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,30 @@ public abstract class BaseFragment extends Fragment {
         unbindViews();
     }
 
+    /**
+     * Fragment lifecycle methods for BasePresenter
+     * onStart and onStop
+     */
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (getPresenter() != null) {
+            Log.e("BasePresenter", "STARTED PRESENTER");
+            getPresenter().onStart();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (getPresenter() != null) {
+            getPresenter().onStop();
+        }
+    }
+
+    /**
+     * Methods available for all fragments
+     */
     private void bindViews (View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
     }
@@ -52,7 +77,11 @@ public abstract class BaseFragment extends Fragment {
         unbinder.unbind();
     }
 
+    /**
+     * Abstract methods that all Fragments must override
+     */
     public abstract int getFragmentLayout();
+    public abstract BasePresenter getPresenter ();
 }
 
 
