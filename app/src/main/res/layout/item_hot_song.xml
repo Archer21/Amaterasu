@@ -42,8 +42,6 @@
             android:layout_height="@dimen/card_hot_song_circle_image_height"
             android:layout_below="@+id/artist_hot_song_item"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/card_hot_song_double_default"
-            android:src="@drawable/eair_aoi"
             android:scaleType="centerCrop"
             app:civ_border_color="@color/colorAccent"
             app:civ_border_width="@dimen/card_hot_song_default_dimen"/>
