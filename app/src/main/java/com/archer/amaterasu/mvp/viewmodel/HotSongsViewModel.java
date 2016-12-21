@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface HotSongsViewModel {
     void setupList ();
-//    void setupAdapter (List<Song> songs);
+    void setupAdapter (List<Song> songs);
     void onFailSearch (String error);
 }

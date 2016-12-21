@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class SongResponse {
-
+    @SerializedName(SongKeys.SONGS_RESULTS)
     SongResults results;
 
     public List<Song> getSongs () {

@@ -56,44 +56,28 @@ public class HotSongsFragment extends BaseFragment implements HotSongsViewModel 
         adapter = new HotSongAdapter(CONTEXT);
     }
 
+//    public void callData(){
+//        Call<SongResponse> call = ApiAdapter.getApiService().getSongs();
+//        call.enqueue(new Callback<SongResponse>() {
+//
+//            @Override
+//            public void onResponse(Call<SongResponse> call, Response<SongResponse> response) {
+//                adapter.addAll(response.body().getSongs());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<SongResponse> call, Throwable t) {
+//                Log.e(LOG_TAG, "ERROR FETCHING DATA");
+//            }
+//        });
+//    }
 
-
-
-
-
-
-
-    public void callData(){
-        Call<SongResponse> call = ApiAdapter.getApiService().getSongs();
-        call.enqueue(new Callback<SongResponse>() {
-
-            @Override
-            public void onResponse(Call<SongResponse> call, Response<SongResponse> response) {
-                adapter.addAll(response.body().getSongs());
-            }
-
-            @Override
-            public void onFailure(Call<SongResponse> call, Throwable t) {
-                Log.e(LOG_TAG, "ERROR FETCHING DATA");
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        callData();
-        Log.e(LOG_TAG, "LOADING DATA FIRST TIME");
-    }
-
-
-
-
-
-
-
-
-
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        callData();
+//        Log.e(LOG_TAG, "LOADING DATA FIRST TIME");
+//    }
 
 
 
@@ -107,11 +91,12 @@ public class HotSongsFragment extends BaseFragment implements HotSongsViewModel 
         recyclerView.addItemDecoration(new ItemOffsetDecoration(CONTEXT, R.integer.hot_song_card_offset));
     }
 
-//    @Override
-//    public void setupAdapter(List<Song> songs) {
-//        Log.e(LOG_TAG, songs.toString());
-//        adapter.addAll(songs);
-//    }
+    @Override
+    public void setupAdapter(List<Song> songs) {
+        Log.e(LOG_TAG, songs.toString());
+        adapter.clear();
+        adapter.addAll(songs);
+    }
 
     @Override
     public void onFailSearch(String error) {

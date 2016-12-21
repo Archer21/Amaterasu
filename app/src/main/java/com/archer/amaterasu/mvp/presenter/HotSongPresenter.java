@@ -30,7 +30,7 @@ public class HotSongPresenter extends BasePresenter {
     @Override
     public void onStart() {
         mView.get().setupList();
-//        interactor.fetchHotSongs();
+        interactor.fetchHotSongs();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class HotSongPresenter extends BasePresenter {
 
     public void onSuccessFetchHotSongs (List<Song> fetchedSongs) {
         Log.e("HotSongPresenter", fetchedSongs.toString());
-//        mView.get().setupAdapter(fetchedSongs);
+        mView.get().setupAdapter(fetchedSongs);
     }
 
     public void onFailureFetchHotSongs (String error) {
