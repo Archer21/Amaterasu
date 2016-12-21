@@ -1,5 +1,7 @@
 package com.archer.amaterasu.mvp.presenter;
 
+import android.util.Log;
+
 import com.archer.amaterasu.common.BasePresenter;
 import com.archer.amaterasu.domain.Song;
 import com.archer.amaterasu.mvp.interactor.HotSongInteractor;
@@ -28,7 +30,7 @@ public class HotSongPresenter extends BasePresenter {
     @Override
     public void onStart() {
         mView.get().setupList();
-        interactor.fetchHotSongs();
+//        interactor.fetchHotSongs();
     }
 
     @Override
@@ -37,7 +39,12 @@ public class HotSongPresenter extends BasePresenter {
     }
 
     public void onSuccessFetchHotSongs (List<Song> fetchedSongs) {
-        mView.get().setupAdapter(fetchedSongs);
+        Log.e("HotSongPresenter", fetchedSongs.toString());
+//        mView.get().setupAdapter(fetchedSongs);
+    }
+
+    public void onFailureFetchHotSongs (String error) {
+        mView.get().onFailSearch(error);
     }
 
 }

@@ -17,6 +17,8 @@ import com.archer.amaterasu.R;
 import com.archer.amaterasu.common.BaseFragment;
 import com.archer.amaterasu.common.BasePresenter;
 import com.archer.amaterasu.domain.Song;
+import com.archer.amaterasu.io.ApiAdapter;
+import com.archer.amaterasu.io.model.SongResponse;
 import com.archer.amaterasu.mvp.presenter.HotSongPresenter;
 import com.archer.amaterasu.mvp.viewmodel.HotSongsViewModel;
 import com.archer.amaterasu.ui.adapter.HotSongAdapter;
@@ -27,6 +29,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +40,7 @@ public class HotSongsFragment extends BaseFragment implements HotSongsViewModel 
 
     // Constants
     private static final int NUM_COLS = 2;
+    private final String LOG_TAG = HotSongsFragment.this.getClass().getSimpleName();
 
     // References
     private HotSongAdapter adapter;
@@ -50,10 +56,45 @@ public class HotSongsFragment extends BaseFragment implements HotSongsViewModel 
         adapter = new HotSongAdapter(CONTEXT);
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+
+
+
+
+
+
+
+    public void callData(){
+        Call<SongResponse> call = ApiAdapter.getApiService().getSongs();
+        call.enqueue(new Callback<SongResponse>() {
+
+            @Override
+            public void onResponse(Call<SongResponse> call, Response<SongResponse> response) {
+                adapter.addAll(response.body().getSongs());
+            }
+
+            @Override
+            public void onFailure(Call<SongResponse> call, Throwable t) {
+                Log.e(LOG_TAG, "ERROR FETCHING DATA");
+            }
+        });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        callData();
+        Log.e(LOG_TAG, "LOADING DATA FIRST TIME");
+    }
+
+
+
+
+
+
+
+
+
+
 
 
     /**
@@ -66,9 +107,15 @@ public class HotSongsFragment extends BaseFragment implements HotSongsViewModel 
         recyclerView.addItemDecoration(new ItemOffsetDecoration(CONTEXT, R.integer.hot_song_card_offset));
     }
 
+//    @Override
+//    public void setupAdapter(List<Song> songs) {
+//        Log.e(LOG_TAG, songs.toString());
+//        adapter.addAll(songs);
+//    }
+
     @Override
-    public void setupAdapter(List<Song> songs) {
-        adapter.addAll(songs);
+    public void onFailSearch(String error) {
+        Log.e(LOG_TAG, error);
     }
 
     /**

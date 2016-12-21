@@ -1,5 +1,7 @@
 package com.archer.amaterasu.domain;
 
+import android.util.SparseArray;
+
 import java.util.HashMap;
 
 /**
@@ -16,7 +18,7 @@ public class Song {
     private String year;
     private float  rating;
 
-    private HashMap<Integer, String> images;
+    private SparseArray<String> images;
 
     public int getId() {
         return id;
@@ -74,11 +76,11 @@ public class Song {
         this.rating = rating;
     }
 
-    public HashMap<Integer, String> getImages() {
+    public SparseArray<String> getImages() {
         return images;
     }
 
-    public void setImages(HashMap<Integer, String> images) {
+    public void setImages(SparseArray<String> images) {
         this.images = images;
     }
 }
