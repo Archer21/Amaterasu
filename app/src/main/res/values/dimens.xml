@@ -12,7 +12,7 @@
     <dimen name="drawer_image_margin_bottom">16dp</dimen>
 
     <!-- Item Hot Song -->
-    <dimen name="card_title_hot_song">18sp</dimen>
+    <dimen name="card_title_hot_song">16sp</dimen>
     <dimen name="card_artist_hot_song">12sp</dimen>
     <dimen name="card_time_hot_song">14sp</dimen>
     <dimen name="card_hot_song_width">172dp</dimen>

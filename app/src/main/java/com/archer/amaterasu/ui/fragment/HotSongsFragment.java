@@ -1,6 +1,7 @@
 package com.archer.amaterasu.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import com.archer.amaterasu.io.ApiAdapter;
 import com.archer.amaterasu.io.model.SongResponse;
 import com.archer.amaterasu.mvp.presenter.HotSongPresenter;
 import com.archer.amaterasu.mvp.viewmodel.HotSongsViewModel;
+import com.archer.amaterasu.ui.activity.SongDetailActivity;
 import com.archer.amaterasu.ui.adapter.HotSongAdapter;
 import com.archer.amaterasu.utils.ItemOffsetDecoration;
 
@@ -53,31 +55,14 @@ public class HotSongsFragment extends BaseFragment implements HotSongsViewModel 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new HotSongAdapter(CONTEXT);
+        adapter = new HotSongAdapter(CONTEXT, new HotSongAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Song item) {
+                Intent intent = new Intent(CONTEXT, SongDetailActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-
-//    public void callData(){
-//        Call<SongResponse> call = ApiAdapter.getApiService().getSongs();
-//        call.enqueue(new Callback<SongResponse>() {
-//
-//            @Override
-//            public void onResponse(Call<SongResponse> call, Response<SongResponse> response) {
-//                adapter.addAll(response.body().getSongs());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<SongResponse> call, Throwable t) {
-//                Log.e(LOG_TAG, "ERROR FETCHING DATA");
-//            }
-//        });
-//    }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        callData();
-//        Log.e(LOG_TAG, "LOADING DATA FIRST TIME");
-//    }
 
 
 
@@ -88,7 +73,7 @@ public class HotSongsFragment extends BaseFragment implements HotSongsViewModel 
     public void setupList() {
         recyclerView.setLayoutManager(new GridLayoutManager(CONTEXT, NUM_COLS));
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new ItemOffsetDecoration(CONTEXT, R.integer.hot_song_card_offset));
+//        recyclerView.addItemDecoration(new ItemOffsetDecoration(CONTEXT, R.integer.hot_song_card_offset));
     }
 
     @Override

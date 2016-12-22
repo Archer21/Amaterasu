@@ -23,10 +23,12 @@ public class HotSongAdapter extends RecyclerView.Adapter<HotSongAdapter.HotSongV
 
     private Context context;
     private List<Song> songs;
+    private OnItemClickListener listener;
 
-    public HotSongAdapter(Context context) {
-        this.context = context;
-        this.songs   = new ArrayList<>();
+    public HotSongAdapter(Context context, OnItemClickListener listener) {
+        this.context  = context;
+        this.songs    = new ArrayList<>();
+        this.listener = listener;
     }
 
     /**
@@ -107,11 +109,21 @@ public class HotSongAdapter extends RecyclerView.Adapter<HotSongAdapter.HotSongV
         holder.setCover(currentSong.getImages().get(0));
         holder.setDuration(currentSong.getDuration());
         holder.setLikes(currentSong.getLikes());
+        holder.bind(songs.get(position), listener);
     }
 
     @Override
     public int getItemCount() {
         return songs.isEmpty() ? 0 : songs.size();
+    }
+
+
+    /**
+     * OnItemClick interface
+     */
+
+    public interface OnItemClickListener {
+        void onItemClick (Song item);
     }
 
     /**
@@ -159,6 +171,19 @@ public class HotSongAdapter extends RecyclerView.Adapter<HotSongAdapter.HotSongV
 
         public void setLikes(int likes) {
             this.likes.setText(likes + "");
+        }
+
+        /**
+         * item click listener for individual views
+         */
+
+        public void bind (final Song item, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(item);
+                }
+            });
         }
     }
 }
