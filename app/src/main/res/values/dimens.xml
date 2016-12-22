@@ -23,6 +23,7 @@
     <dimen name="card_hot_song_corner_radius">4dp</dimen>
     <dimen name="card_hot_song_circle_image_width">96dp</dimen>
     <dimen name="card_hot_song_circle_image_height">106dp</dimen>
+    <dimen name="app_bar_layout_height">256dp</dimen>
 
 
 </resources>

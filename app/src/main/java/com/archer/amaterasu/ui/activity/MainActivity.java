@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import com.archer.amaterasu.R;
 import com.archer.amaterasu.ui.fragment.HomeFragment;
+import com.archer.amaterasu.ui.fragment.HotSongsFragment;
 import com.archer.amaterasu.ui.fragment.SearchFragment;
+import com.archer.amaterasu.utils.Helpers;
 import com.archer.amaterasu.utils.SetupNavigationDrawer;
 
 import butterknife.BindView;
@@ -29,7 +31,7 @@ public class MainActivity extends SetupNavigationDrawer {
 
     // ACTIVITY INSTANCES AND REFERENCES
     private final String LOG_TAG = MainActivity.this.getClass().getSimpleName();
-    private FragmentManager fragmentManager;
+    private FragmentManager fragmentManager = getSupportFragmentManager();
     private FragmentTransaction fragmentTransaction;
 
     @Override
@@ -38,17 +40,17 @@ public class MainActivity extends SetupNavigationDrawer {
         setupToolbar(toolbar);
         configDrawer(R.string.open_drawer, R.string.close_drawer);
         if (savedInstanceState == null) {
-            setupFragment(new HomeFragment());
+            Helpers.setupFragment(fragmentManager, new HomeFragment(), R.id.main_container);
         }
     }
 
     // ACTIVITY METHODS
 
-    public void setupFragment (Fragment fragment) {
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, fragment).commit();
-    }
+//    public void setupFragment (Fragment fragment) {
+//        fragmentManager = getSupportFragmentManager();
+//        fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.main_container, fragment).commit();
+//    }
 
 
    // OVERRIDED METHODS FROM BASEACTIVITY
@@ -79,9 +81,9 @@ public class MainActivity extends SetupNavigationDrawer {
         int id = item.getItemId();
 
         if (id == R.id.drawer_home) {
-            setupFragment(new HomeFragment());
+            Helpers.setupFragment(fragmentManager, new HomeFragment(), R.id.main_container);
         } else if (id == R.id.drawer_search) {
-            setupFragment(new SearchFragment());
+            Helpers.setupFragment(fragmentManager, new SearchFragment(), R.id.main_container);
         } else if (id == R.id.drawer_log_out) {
             Log.d(LOG_TAG, "Logout of the application");
         }

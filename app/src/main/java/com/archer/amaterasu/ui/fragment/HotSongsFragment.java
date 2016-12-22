@@ -42,6 +42,7 @@ public class HotSongsFragment extends BaseFragment implements HotSongsViewModel 
 
     // Constants
     private static final int NUM_COLS = 2;
+    private static final String IMAGE_URL = "IMAGE";
     private final String LOG_TAG = HotSongsFragment.this.getClass().getSimpleName();
 
     // References
@@ -59,6 +60,8 @@ public class HotSongsFragment extends BaseFragment implements HotSongsViewModel 
             @Override
             public void onItemClick(Song item) {
                 Intent intent = new Intent(CONTEXT, SongDetailActivity.class);
+                intent.putExtra(IMAGE_URL, item.getImages().get(1));
+
                 startActivity(intent);
             }
         });

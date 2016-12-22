@@ -18,6 +18,9 @@
     <string name="card_artist_hot_song_item">Haruka Tomatsu</string>
     <string name="card_duration_hot_song_item">4:23</string>
     <string name="card_likes_hot_song_item">1285</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
 
 
